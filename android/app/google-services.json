@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "386935879731",
+    "firebase_url": "https://hdb-finder-297c0.firebaseio.com",
+    "project_id": "hdb-finder-297c0",
+    "storage_bucket": "hdb-finder-297c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386935879731:android:cafe0335b9f476069ecb46",
+        "android_client_info": {
+          "package_name": "com.example.hdbfinder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "386935879731-rp5h8r3pod8lnvfjqvndapgn1ffga4br.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqS2Cn7Dclu6kpm14IyLke1AXo3iMoFPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386935879731-rp5h8r3pod8lnvfjqvndapgn1ffga4br.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
