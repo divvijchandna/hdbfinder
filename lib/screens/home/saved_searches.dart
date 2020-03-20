@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hdbfinder/screens/home/saved_searches.dart';
-import 'package:hdbfinder/screens/nav-drawer.dart';
+import 'package:hdbfinder/screens/home/home.dart';
 import 'package:hdbfinder/screens/home/hdb_settings.dart';
 
-
-class Home extends StatefulWidget {
+class SavedSearches extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _SavedSearchesState createState() => _SavedSearchesState();
 }
 
-class _HomeState extends State<Home> {
+class _SavedSearchesState extends State<SavedSearches> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,17 +27,17 @@ class _HomeState extends State<Home> {
             ListTile(
               leading: Icon(Icons.home),
               title: Text('Home'),
-              onTap: () => {},
+              onTap: () {
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Home())
+              );
+              },
             ),
             ListTile(
               leading: Icon(Icons.save_alt),
               title: Text('Saved Searches'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SavedSearches())
-                );
-                },
+              onTap: () => {Navigator.of(context).pop()},
             ),
             ListTile(
               leading: Icon(Icons.settings),
@@ -63,9 +61,8 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         backgroundColor: Color(0xff3a506b),
         centerTitle: true,
-        title: Text('Home'),
+        title: Text('Saved Searches'),
       ),
     );
   }
 }
-
