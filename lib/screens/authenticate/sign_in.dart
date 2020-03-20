@@ -173,7 +173,8 @@ class _SignInState extends State<SignIn> {
                             }
                             else {
                               print('signed in');
-                              print(result);
+                              print(result.uid);
+
                             }
                           },
                           child: Text(
