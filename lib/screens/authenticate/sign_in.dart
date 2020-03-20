@@ -167,10 +167,14 @@ class _SignInState extends State<SignIn> {
                         height: 18.0,
                         child: FlatButton(
                           onPressed: () async {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => Home())
-                            );
+                            dynamic result = await _auth.signInAnon();
+                            if (result == null) {
+                              print('error signing in');
+                            }
+                            else {
+                              print('signed in');
+                              print(result);
+                            }
                           },
                           child: Text(
                             'ANONYMOUS LOGIN',
