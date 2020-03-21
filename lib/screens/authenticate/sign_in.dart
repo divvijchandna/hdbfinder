@@ -1,9 +1,11 @@
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hdbfinder/screens/authenticate/create_account.dart';
 import 'package:hdbfinder/screens/authenticate/forgot_pw.dart';
 import 'package:hdbfinder/screens/home/home.dart';
 import 'package:hdbfinder/services/auth.dart';
+import 'package:hdbfinder/shared/loading.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -13,6 +15,9 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
 
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+  bool loading = false;
+
   String email = '';
   String password = '';
   bool passwordVisible = false;
@@ -24,7 +29,7 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
       backgroundColor: Color(0xff3a506b),
       body: new Center(
         child: SingleChildScrollView(
@@ -52,6 +57,7 @@ class _SignInState extends State<SignIn> {
                   height: 15.0,
                 ),
                 Form(
+                  key: _formKey,
                   child: Column(
                     children: <Widget>[
                       Padding(
@@ -81,6 +87,7 @@ class _SignInState extends State<SignIn> {
                             style: TextStyle(
                               color: Color(0xffe0e0e2),
                             ),
+                            validator: (val) => val.isEmpty ? 'Enter your email' : null,
                             onChanged: (val) {
                               setState(() => email = val);
                             },
@@ -130,10 +137,10 @@ class _SignInState extends State<SignIn> {
                             style: TextStyle(
                               color: Color(0xffe0e0e2),
                             ),
+                            validator: (val) => val.length < 6 ? 'Password should be at least 6 characters' : null,
                             onChanged: (val) {
                               setState(() => password = val);
                             },
-
                           ),
                         ),
                       ),
@@ -148,7 +155,24 @@ class _SignInState extends State<SignIn> {
                       height: 50.0,
                       child: RaisedButton(
                         onPressed: () async {
-
+                          if(_formKey.currentState.validate()) {
+                            setState(() => loading = true);
+                            dynamic result = await _auth.signIn(email, password);
+                            if(result == null) {
+                              setState(() => loading = false);
+                              Flushbar(
+                                title: 'Invalid credentials',
+                                message: 'Please try again.',
+                                icon: Icon(
+                                  Icons.info_outline,
+                                  size: 28,
+                                  color: Colors.red,
+                                ),
+                                leftBarIndicatorColor: Colors.red,
+                                duration: Duration(seconds: 3),
+                              )..show(context);
+                            }
+                          }
                         },
                         child: Text(
                           'Login',

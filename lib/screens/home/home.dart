@@ -73,7 +73,7 @@ class _HomeState extends State<Home> {
               leading: Icon(Icons.exit_to_app),
               title: Text('Logout'),
               onTap: () async {
-//                await _auth.signOut();
+                await _auth.signOut();
               },
             ),
           ],

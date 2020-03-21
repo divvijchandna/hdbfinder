@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hdbfinder/models/user.dart';
+import 'package:hdbfinder/screens/home/home.dart';
 
 class AuthService {
 
@@ -19,15 +20,26 @@ class AuthService {
   }
 
   //sign in with email & password
+  Future signIn(String email, String password) async {
+    try {
+      AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      FirebaseUser user = result.user;
+      return _userFromFirebaseUser(user);
+    } catch(e) {
+      print(e.toString());
+      return null;
+    }
+  }
 
   //register with email & password
   Future register(String email, String password) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-      FirebaseUser user= result.user;
+      FirebaseUser user = result.user;
       return _userFromFirebaseUser(user);
     } catch(e) {
-
+      print(e.toString());
+      return null;
     }
   }
 

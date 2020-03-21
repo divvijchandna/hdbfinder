@@ -1,6 +1,8 @@
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:hdbfinder/screens/home/home.dart';
 import 'package:hdbfinder/services/auth.dart';
+import 'package:hdbfinder/shared/loading.dart';
 
 class CreateAccount extends StatefulWidget {
   @override
@@ -11,12 +13,12 @@ class _CreateAccountState extends State<CreateAccount> {
 
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   String email = '';
   String password = '';
   String rePassword = '';
   String name = '';
-  String error = '';
   bool passwordVisible1 = false;
   bool passwordVisible2 = false;
 
@@ -28,7 +30,7 @@ class _CreateAccountState extends State<CreateAccount> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
       backgroundColor: Color(0xff3a506b),
       body: new Center(
         child: SingleChildScrollView(
@@ -244,9 +246,21 @@ class _CreateAccountState extends State<CreateAccount> {
                     child: RaisedButton(
                       onPressed: () async {
                         if(_formKey.currentState.validate()) {
+                          setState(() => loading = true);
                           dynamic result = await _auth.register(email, password);
                           if(result == null) {
-                            setState(() => error = 'Please supply a valid email');
+                            setState(() => loading = false);
+                            Flushbar(
+                              title: 'Invalid email',
+                              message: 'Please try again.',
+                              icon: Icon(
+                                Icons.info_outline,
+                                size: 28,
+                                color: Colors.red,
+                              ),
+                              leftBarIndicatorColor: Colors.red,
+                              duration: Duration(seconds: 3),
+                            )..show(context);
                           }
                         }
                       },
@@ -263,10 +277,6 @@ class _CreateAccountState extends State<CreateAccount> {
                     ),
                   )
               ),
-              Text(
-                error,
-                style: TextStyle(color: Colors.red, fontSize: 14.0)
-              )
             ],
           ),
         )
