@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hdbfinder/screens/home/saved_searches.dart';
 import 'package:hdbfinder/screens/nav-drawer.dart';
 import 'package:hdbfinder/screens/home/hdb_settings.dart';
+import 'package:hdbfinder/services/auth.dart';
 
 
 class Home extends StatefulWidget {
@@ -10,6 +11,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +58,9 @@ class _HomeState extends State<Home> {
             ListTile(
               leading: Icon(Icons.exit_to_app),
               title: Text('Logout'),
-              onTap: () => {Navigator.of(context).pop()},
+              onTap: () async {
+//                await _auth.signOut();
+              },
             ),
           ],
         ),
