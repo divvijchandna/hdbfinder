@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hdbfinder/screens/home/alternate_home.dart';
 import 'package:hdbfinder/screens/home/saved_searches.dart';
+import 'package:hdbfinder/screens/home/search_bar.dart';
+import 'package:hdbfinder/screens/home/search_bar_home.dart';
 import 'package:hdbfinder/screens/nav-drawer.dart';
 import 'package:hdbfinder/screens/home/hdb_settings.dart';
 import 'package:hdbfinder/services/auth.dart';
+import 'package:hdbfinder/screens/home/search_bar_home.dart';
+import 'package:hdbfinder/screens/home/search_bar.dart';
+import 'package:dio/dio.dart';
+
 
 
 class Home extends StatefulWidget {
@@ -13,8 +20,10 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   AuthService _auth = AuthService();
+  SearchBar searchBar;
 
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
@@ -33,7 +42,12 @@ class _HomeState extends State<Home> {
             ListTile(
               leading: Icon(Icons.home),
               title: Text('Home'),
-              onTap: () => {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Home())
+                );
+              },
             ),
             ListTile(
               leading: Icon(Icons.save_alt),
@@ -70,8 +84,23 @@ class _HomeState extends State<Home> {
         backgroundColor: Color(0xff3a506b),
         centerTitle: true,
         title: Text('Home'),
+
+          actions: <Widget>[
+            IconButton(
+      icon: const Icon(Icons.search),
+        onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SearchBox())
+        );
+        }
+
       ),
+    ]
+    ),
     );
+
+
   }
 }
 
