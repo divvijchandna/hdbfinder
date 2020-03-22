@@ -2,9 +2,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
 
-final resalePrice='';
-final resaleIndex='';
-final resaleMedian='';
+final resalePrice='https://data.gov.sg/api/action/datastore_search?resource_id=42ff9cfe-abe5-4b54-beda-c88f9bb438ee';
+final resaleIndex='https://data.gov.sg/api/action/datastore_search?resource_id=52e93430-01b7-4de0-80df-bc83d0afed40';
+final resaleMedian='https://data.gov.sg/api/action/datastore_search?resource_id=a5ddfc4d-0e43-4bfe-8f51-e504e1365e27';
 final geoLoc='';
 final hospitalLoc='';
 final mrtLoc='';
@@ -13,14 +13,13 @@ final test='https://jsonplaceholder.typicode.com/posts';
 
 
 class FetchJSON{
-  var jsonbody;
+  var jsonBody;
 
   FetchJSON();
 
   void fetch(String request) async{
-    this.jsonbody=json.decode(await fetchData(request));
+    this.jsonBody=json.decode(await fetchData(request));
   }
-
 }
 
 Future<String> fetchData(String request) async{
