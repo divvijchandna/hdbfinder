@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hdbfinder/models/user.dart';
 import 'package:hdbfinder/screens/home/home.dart';
+import 'package:hdbfinder/services/database.dart';
 
 class AuthService {
 
@@ -8,7 +9,7 @@ class AuthService {
 
   //create user obj based on FirebaseUser
   User _userFromFirebaseUser(FirebaseUser user) {
-    return user != null ? User(uid: user.uid) : null;
+    return user != null ? User(uid: user.uid, email: user.email, name: user.displayName) : null;
   }
 
   //sign in anon
@@ -32,7 +33,7 @@ class AuthService {
   }
 
   //register with email & password
-  Future register(String email, String password) async {
+  Future register(String email, String password, String name) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;

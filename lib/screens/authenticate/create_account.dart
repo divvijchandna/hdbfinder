@@ -247,7 +247,7 @@ class _CreateAccountState extends State<CreateAccount> {
                       onPressed: () async {
                         if(_formKey.currentState.validate()) {
                           setState(() => loading = true);
-                          dynamic result = await _auth.register(email, password);
+                          dynamic result = await _auth.register(email, password, name);
                           if(result == null) {
                             setState(() => loading = false);
                             Flushbar(
