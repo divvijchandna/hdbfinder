@@ -1,51 +1,28 @@
-import 'apply_filters.dart';
 
 class House{
-  int _houseID;
-  String _houseNo;
-  String _street;
-  String _locality;
-  String _nearestMRT;
-  double _size;
+  var date;
+  var town;
+  var type;
+  var block;
+  var street;
+  var storeyRange;
+  var area;
+  var model;
+  var lease;
+  var price;
 
-  House(this._houseID,this._houseNo,this._street,this._locality,this._nearestMRT,this._size) {
-    //Data safety measures
+  House(this.date, this.town, this.type, this.block, this.street,
+      this.storeyRange, this.area, this.model, this.lease, this.price);
+
+  String getNearestMRT(){
+    return ' ';
   }
 
-  set houseID(int value) {
-    _houseID = value;
+  String getNearestMedical(){
+    return ' ';
   }
 
-
-  set houseNo(String value) {
-    _houseNo = value;
+  String getNearestSchool(){
+    return ' ';
   }
-
-  set street(String value) {
-    _street = value;
-  }
-
-  set locality(String value) {
-    _locality = value;
-  }
-
-  set nearestMRT(String value) {
-    _nearestMRT = value;
-  }
-
-  set size(double value) {
-    _size = value;
-  }
-
-  String get houseNo => _houseNo;
-
-  String get street => _street;
-
-  String get locality => _locality;
-
-  String get nearestMRT => _nearestMRT;
-
-  double get size => _size;
-
-  int get houseID => _houseID;
 }
