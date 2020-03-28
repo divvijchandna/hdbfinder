@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hdbfinder/screens/home/alternate_home.dart';
+import 'package:hdbfinder/screens/home/hdb_listings.dart';
 import 'package:hdbfinder/screens/home/saved_searches.dart';
 import 'package:hdbfinder/screens/home/search_bar.dart';
 import 'package:hdbfinder/screens/home/search_bar_home.dart';
