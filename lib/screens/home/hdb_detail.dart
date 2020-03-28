@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
+import 'package:google_fonts/google_fonts.dart';
 
 class HDBDetail extends StatelessWidget {
   final houses;
-  var image_url = 'https://picsum.photos/250?image=9';
+  var image_url = 'https://picsum.photos/300?image=522';
   HDBDetail(this.houses);
   Color mainColor = const Color(0xff3C3261);
 
@@ -53,33 +54,92 @@ class HDBDetail extends StatelessWidget {
                       new Expanded(
                           child: new Text(
                             houses["block"]+', '+houses["street_name"],
-                            style: new TextStyle(
-                                color: Colors.white,
-                                fontSize: 30.0,
-                                fontFamily: 'Arvo'),
+                            style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                                    color: Colors.white, fontSize: 30))
                           )),
                       new Text(
-                        '${houses["resale_price"]}',
-                        style: new TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.0,
-                            fontFamily: 'Arvo'),
+                        '\$'+'${houses["resale_price"]}',
+                        style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                                color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
                       )
                     ],
                   ),
                 ),
-                new Text(
-                    'Neighbourhood: '+ houses["town"] + '\n' +
-                        //'Neighbourhood Rank: ' + houses["rank town"] +'\n'+  NOT ACCESSIBLE
-                        'Flat Type: ' + houses["flat_type"] +'\n' +
-                        'Model: ' + houses["flat_model"] +'\n' +
-                        'Area: ' + houses["floor_area_sqm"] +'\n' +
-                        'Month: ' + houses["month"] +'\n' +
-                        'Lease Commencement: ' + houses["lease_commence_date"] +'\n' +
-                        'Remaining Lease: ' + houses["remaining_lease"] +'\n' +
-                        'Storey: ' + houses["storey_range"] +'\n'
-                    ,style: new TextStyle(color: Colors.white, fontFamily: 'Arvo')),
-                new Padding(padding: const EdgeInsets.all(10.0)),
+                new Row(
+                  children: <Widget>[
+                  new Icon(Icons.home, color: Colors.white, size: 20) ,
+                new Text('\n'+'   Neighbourhood: '+ houses["town"] + '\n' ,
+                    style: GoogleFonts.montserrat(
+                        textStyle: TextStyle(
+                            color: Colors.white, fontSize: 18))
+                )
+                  ]),
+                new Row(
+                    children: <Widget>[
+                      new Icon(Icons.home, color: Colors.white, size: 20) ,
+                      new Text('\n'+'   Flat Type: ' + houses["flat_type"] +'\n' ,
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Colors.white, fontSize: 18))
+                      )
+                    ]),
+                new Row(
+                    children: <Widget>[
+                      new Icon(Icons.star_border, color: Colors.white, size: 20) ,
+                      new Text('\n'+'   Model: ' + houses["flat_model"] +'\n'  ,
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Colors.white, fontSize: 18))
+                      )
+                    ]),
+                new Row(
+                    children: <Widget>[
+                      new Icon(Icons.crop_square, color: Colors.white, size: 20) ,
+                      new Text('\n'+'   Area (sqm): ' + houses["floor_area_sqm"] +'\n' ,
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Colors.white, fontSize: 18))
+                      )
+                    ]),
+                new Row(
+                    children: <Widget>[
+                      new Icon(Icons.calendar_today, color: Colors.white, size: 20) ,
+                      new Text('\n'+'   Date: ' + houses["month"] +'\n'  ,
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Colors.white, fontSize: 18))
+                      )
+                    ]),
+                new Row(
+                    children: <Widget>[
+                      new Icon(Icons.calendar_today, color: Colors.white, size: 20) ,
+                      new Text('\n'+'   Lease Commencement: ' + houses["lease_commence_date"] +'\n'  ,
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Colors.white, fontSize: 18))
+                      )
+                    ]),
+                new Row(
+                    children: <Widget>[
+                      new Icon(Icons.calendar_today, color: Colors.white, size: 20) ,
+                      new Text('\n'+'   Remaining Lease: ' + houses["remaining_lease"] +'\n' ,
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Colors.white, fontSize: 18))
+                      )
+                    ]),
+                new Row(
+                    children: <Widget>[
+                      new Icon(Icons.location_city, color: Colors.white, size: 20) ,
+                      new Text('\n'+'   Storey: ' + houses["storey_range"] +'\n' ,
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Colors.white, fontSize: 18))
+                      )
+                    ]),
+
                 new Row(
                   children: <Widget>[
                     new Expanded(
