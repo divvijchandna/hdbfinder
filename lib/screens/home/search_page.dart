@@ -23,9 +23,7 @@ class _SearchPageState extends State<SearchPage> {
       ),
       body: ListView(
         children: <Widget>[
-          Container(
-            child: FutureBuilder<dynamic>
-          )
+          Container()
         ],
       )
     );
