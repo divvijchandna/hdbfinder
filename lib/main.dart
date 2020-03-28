@@ -19,3 +19,15 @@ class MyApp extends StatelessWidget {
   }
 }
 
+//  print(1);
+//  var f=SearchListings();
+//  f.setFilters(1, 0, 1, 0, 0);
+//  f.setSortBy('resale_price');
+//  f.setPriceRange(200000, 210000);
+//  f.setTown("jurong east");
+//
+//  await f.getListingsByFilter();
+//
+//  print(f.listing.jsonBody);
+//
+//  print(2);
