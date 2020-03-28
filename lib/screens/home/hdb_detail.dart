@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
 class HDBDetail extends StatelessWidget {
-  final movie;
-  var image_url = 'https://image.tmdb.org/t/p/w500/';
-  HDBDetail(this.movie);
+  final houses;
+  var image_url = 'https://picsum.photos/250?image=9';
+  HDBDetail(this.houses);
   Color mainColor = const Color(0xff3C3261);
 
   @override
@@ -12,7 +12,7 @@ class HDBDetail extends StatelessWidget {
     return new Scaffold(
       body: new Stack(fit: StackFit.expand, children: [
         new Image.network(
-          image_url + movie['poster_path'],
+          image_url,
           fit: BoxFit.cover,
         ),
         new BackdropFilter(
@@ -21,7 +21,6 @@ class HDBDetail extends StatelessWidget {
             color: Colors.black.withOpacity(0.5),
           ),
         ),
-
         new SingleChildScrollView(
           child: new Container(
             margin: const EdgeInsets.all(20.0),
@@ -37,7 +36,7 @@ class HDBDetail extends StatelessWidget {
                       borderRadius: new BorderRadius.circular(10.0),
                       image: new DecorationImage(
                           image: new NetworkImage(
-                              image_url + movie['poster_path']),
+                              image_url),
                           fit: BoxFit.cover),
                       boxShadow: [
                         new BoxShadow(
@@ -53,14 +52,14 @@ class HDBDetail extends StatelessWidget {
                     children: <Widget>[
                       new Expanded(
                           child: new Text(
-                            movie['title'],
+                            houses["block"]+', '+houses["street_name"],
                             style: new TextStyle(
                                 color: Colors.white,
                                 fontSize: 30.0,
                                 fontFamily: 'Arvo'),
                           )),
                       new Text(
-                        '${movie['vote_average']}/10',
+                        '${houses["resale_price"]}',
                         style: new TextStyle(
                             color: Colors.white,
                             fontSize: 20.0,
@@ -69,7 +68,17 @@ class HDBDetail extends StatelessWidget {
                     ],
                   ),
                 ),
-                new Text(movie['overview'],style: new TextStyle(color: Colors.white, fontFamily: 'Arvo')),
+                new Text(
+                    'Neighbourhood: '+ houses["town"] + '\n' +
+                        //'Neighbourhood Rank: ' + houses["rank town"] +'\n'+  NOT ACCESSIBLE
+                        'Flat Type: ' + houses["flat_type"] +'\n' +
+                        'Model: ' + houses["flat_model"] +'\n' +
+                        'Area: ' + houses["floor_area_sqm"] +'\n' +
+                        'Month: ' + houses["month"] +'\n' +
+                        'Lease Commencement: ' + houses["lease_commence_date"] +'\n' +
+                        'Remaining Lease: ' + houses["remaining_lease"] +'\n' +
+                        'Storey: ' + houses["storey_range"] +'\n'
+                    ,style: new TextStyle(color: Colors.white, fontFamily: 'Arvo')),
                 new Padding(padding: const EdgeInsets.all(10.0)),
                 new Row(
                   children: <Widget>[
@@ -79,7 +88,7 @@ class HDBDetail extends StatelessWidget {
                           height: 60.0,
                           alignment: Alignment.center,
                           child: new Text(
-                            'Rate Movie',
+                            'Rate Unit',
                             style: new TextStyle(
                                 color: Colors.white,
                                 fontFamily: 'Arvo',
