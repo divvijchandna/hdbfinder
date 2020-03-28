@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hdbfinder/screens/home/alternate_home.dart';
-import 'package:hdbfinder/screens/home/hdb_listings.dart';
-import 'package:hdbfinder/screens/home/saved_searches.dart';
-import 'package:hdbfinder/screens/home/search_bar.dart';
 import 'package:hdbfinder/screens/home/search_bar_home.dart';
-import 'package:hdbfinder/screens/nav-drawer.dart';
-import 'package:hdbfinder/screens/home/hdb_settings.dart';
+import 'package:hdbfinder/screens/home/search_page.dart';
 import 'package:hdbfinder/services/auth.dart';
-import 'package:hdbfinder/screens/home/search_bar_home.dart';
-import 'package:hdbfinder/screens/home/search_bar.dart';
-import 'package:dio/dio.dart';
+import 'package:hdbfinder/shared/drawer.dart';
 
 
 
@@ -22,83 +15,91 @@ class _HomeState extends State<Home> {
 
   AuthService _auth = AuthService();
   SearchBar searchBar;
+  final _formKey = GlobalKey<FormState>();
+  String search= '';
 
   @override
 
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
+        drawer: MenuDrawer(),
+        backgroundColor: Color(0xffe0e0e2),
+        appBar: AppBar(
+          backgroundColor: Color(0xff3a506b),
+          centerTitle: true,
+          title: Text('Home'),
+        ),
+        body: ListView(
           children: <Widget>[
-            DrawerHeader(
-              child: Text(
-                'HDBFinder Menu',
-                style: TextStyle(color: Color(0xff3a506b), fontSize: 25),
+            Container(
+              alignment: Alignment.topCenter,
+              child: Form(
+                key: _formKey,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
+                  child: Container(
+                    width: 350.0,
+                    child: TextFormField(
+                      maxLines: 1,
+                      keyboardType: TextInputType.text,
+                      autofocus: false,
+                      decoration: InputDecoration(
+                          enabledBorder: new OutlineInputBorder(
+                              borderSide: new BorderSide(color: Color(0xff3a506b), width: 2.0)
+                          ),
+                          focusedBorder: new OutlineInputBorder(
+                              borderSide: new BorderSide(color: Color(0xff3a506b), width: 2.0)
+                          ),
+                          hintText: 'Search',
+                          prefixIcon: new Icon(
+                              Icons.search,
+                              color: Color(0xff3a506b)
+                          ),
+                          hintStyle: TextStyle(
+                              color: Color(0xff3a506b)
+                          )
+                      ),
+                      style: TextStyle(
+                        color: Color(0xffe0e0e2),
+                      ),
+                      onChanged: (val) {
+                        setState(() => search = val);
+                      },
+                    ),
+                  ),
+                ),
               ),
-              decoration: BoxDecoration(
-                color: Color(0xffb5BAD0),
-              ),
             ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Home'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HDBList())
-                );
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.save_alt),
-              title: Text('Saved Searches'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SavedSearches())
-                );
-                },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Settings())
-                );
-                },
-            ),
-            ListTile(
-              leading: Icon(Icons.exit_to_app),
-              title: Text('Logout'),
-              onTap: () async {
-                await _auth.signOut();
-              },
+            Padding(
+                padding: const EdgeInsets.fromLTRB(135.0, 10.0, 135.0, 0.0),
+                child: Container(
+                  width: 30.0,
+                  height: 40.0,
+                  child: RaisedButton(
+                    onPressed: () async {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SearchPage(
+                              search: search,
+                            )),
+                      );
+                    },
+                    child: Text(
+                      'Search',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xffe0e0e2),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    color: Color(0xff3a506b),
+                  ),
+                )
             ),
           ],
-        ),
-      ),
-      backgroundColor: Color(0xffe0e0e2),
-      appBar: AppBar(
-        backgroundColor: Color(0xff3a506b),
-        centerTitle: true,
-        title: Text('Home'),
-
-          actions: <Widget>[
-            IconButton(
-      icon: const Icon(Icons.search),
-        onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => SearchBox())
-        );
-        }
-
-      ),
-    ]
-    ),
+        )
     );
 
 
