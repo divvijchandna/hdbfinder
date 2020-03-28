@@ -2,29 +2,29 @@ import 'set_filters.dart';
 
 class Filters{
   //Filter Settings
-  int _filterByPrice=0;
-  int _filterBySize=0;
-  int _filterByMRTProximity=0;
-  int _filterByHealthCareProximity=0;
-  int _filterByPollutionIndex=0;
+  var filterByPrice=0;
+  var filterByArea=0;
+  var filterByTown=0;
+  var filterByModel=0;
+  var filterByType=0;
 
   //Filter Range Parameters
   FilterRange filterRange=FilterRange();
 
-  Filters(this._filterByPrice,this._filterBySize,this._filterByMRTProximity,this._filterByHealthCareProximity,this._filterByPollutionIndex){
-    if(this._filterByPrice!=0 && this._filterByPrice!=1){
+  Filters(this.filterByPrice,this.filterByArea,this.filterByTown,this.filterByModel,this.filterByType){
+    if(this.filterByPrice!=0 && this.filterByPrice!=1){
       throw FormatException("Invalid Filter Setting");
     }
-    if(this._filterBySize!=0 && this._filterBySize!=1){
+    if(this.filterByArea!=0 && this.filterByArea!=1){
       throw FormatException("Invalid Filter Setting");
     }
-    if(this._filterByMRTProximity!=0 && this._filterByMRTProximity!=1){
+    if(this.filterByTown!=0 && this.filterByTown!=1){
       throw FormatException("Invalid Filter Setting");
     }
-    if(this._filterByHealthCareProximity!=0 && this._filterByHealthCareProximity!=1){
+    if(this.filterByModel!=0 && this.filterByModel!=1){
       throw FormatException("Invalid Filter Setting");
     }
-    if(this._filterByPollutionIndex!=0 && this._filterByPollutionIndex!=1) {
+    if(this.filterByType!=0 && this.filterByType!=1){
       throw FormatException("Invalid Filter Setting");
     }
   }

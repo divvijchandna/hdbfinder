@@ -1,14 +1,9 @@
 class User{
 
   final String uid;
-  int _userID;
-  String _givenName;
-  String _lastName;
-  String _address;
-  int _postcode;
+  final String name;
+  final String email;
 
-  User({ this.uid });
-
-
+  User({ this.uid, this.name, this.email });
 
 }

@@ -6,9 +6,9 @@ import 'package:hdbfinder/screens/home/search_bar.dart';
 import 'package:hdbfinder/screens/home/search_bar_home.dart';
 import 'package:hdbfinder/screens/nav-drawer.dart';
 import 'package:hdbfinder/screens/home/hdb_settings.dart';
+import 'package:hdbfinder/services/auth.dart';
 import 'package:hdbfinder/screens/home/search_bar_home.dart';
 import 'package:hdbfinder/screens/home/search_bar.dart';
-
 import 'package:dio/dio.dart';
 
 
@@ -20,6 +20,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
+  AuthService _auth = AuthService();
   SearchBar searchBar;
 
   @override
@@ -72,7 +73,9 @@ class _HomeState extends State<Home> {
             ListTile(
               leading: Icon(Icons.exit_to_app),
               title: Text('Logout'),
-              onTap: () => {Navigator.of(context).pop()},
+              onTap: () async {
+                await _auth.signOut();
+              },
             ),
           ],
         ),
