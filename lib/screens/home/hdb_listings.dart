@@ -4,6 +4,9 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'config.dart';
 import 'hdb_detail.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+
 
 
 class HDBList extends StatefulWidget {
@@ -15,14 +18,14 @@ class HDBList extends StatefulWidget {
 
 class HDBListState extends State<HDBList> {
 
-  var movies;
+  var houses;
   Color mainColor = const Color(0xff3C3261);
 
   void getData() async {
-    var data = await getJson();
+    var data = await getJson('https://data.gov.sg/api/action/datastore_search?resource_id=42ff9cfe-abe5-4b54-beda-c88f9bb438ee');
 
     setState(() {
-      movies = data['results'];
+      houses = data['result']['records'];
     });
   }
 
@@ -41,11 +44,11 @@ class HDBListState extends State<HDBList> {
           color: mainColor,
         ),
         title: new Text(
-          'Movies',
-          style: new TextStyle(
-              color: mainColor,
-              fontFamily: 'Arvo',
-              fontWeight: FontWeight.bold),
+          'HDB Listings',
+          style: GoogleFonts.montserrat(
+              textStyle: TextStyle(
+                  color: Color(0xff3a506b), fontSize: 22.0, fontWeight: FontWeight.bold)
+          ),
         ),
         actions: <Widget>[
           new Icon(
@@ -62,15 +65,15 @@ class HDBListState extends State<HDBList> {
             new HDBTitle(mainColor),
             new Expanded(
               child: new ListView.builder(
-                  itemCount: movies == null ? 0 : movies.length,
+                  itemCount: houses == null ? 0 : houses.length,
                   itemBuilder: (context, i) {
                     return new FlatButton(
-                      child: new HDBCell(movies, i),
+                      child: new HDBCell(houses, i),
                       padding: const EdgeInsets.all(0.0),
                       onPressed: () {
                         Navigator.push(context,
                             new MaterialPageRoute(builder: (context) {
-                              return new HDBDetail(movies[i]);
+                              return new HDBDetail(houses[i]);
                             }));
                       },
                       color: Colors.white,
@@ -84,11 +87,19 @@ class HDBListState extends State<HDBList> {
   }
 }
 
-Future<Map> getJson() async {
-  var apiKey = getApiKey();
-  var url = 'http://api.themoviedb.org/3/discover/movie?api_key=${apiKey}';
-  var response = await http.get(url);
-  return json.decode(response.body);
+Future<Map> getJson(String request) async {
+  //var apiKey = getApiKey();
+  //var url = 'http://api.themoviedb.org/3/discover/movie?api_key=${apiKey}';
+  var response = await http.get(
+      Uri.encodeFull(request),
+      headers: {
+        'Accept':'application/json'
+      });
+  if(response.statusCode==200){
+    return json.decode(response.body);
+  }else{
+    throw Exception("Failure retrieving data.");
+  }
 }
 
 class HDBTitle extends StatelessWidget {
@@ -101,13 +112,11 @@ class HDBTitle extends StatelessWidget {
     return new Padding(
       padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
       child: new Text(
-        'Top Rated',
-        style: new TextStyle(
-            fontSize: 40.0,
-            color: mainColor,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Arvo'),
-        textAlign: TextAlign.left,
+        'Featured',
+        style: GoogleFonts.montserrat(
+            textStyle: TextStyle(
+                color: Color(0xff7389ae), fontSize: 32.0)
+        ),
       ),
     );
   }
@@ -115,11 +124,11 @@ class HDBTitle extends StatelessWidget {
 
 class HDBCell extends StatelessWidget {
 
-  final movies;
+  final houses;
   final i;
   Color mainColor = const Color(0xff3C3261);
-  var image_url = 'https://image.tmdb.org/t/p/w500/';
-  HDBCell(this.movies, this.i);
+  var image_url = 'https://www.straitstimes.com/sites/default/files/styles/article_pictrure_780x520_/public/articles/2014/01/16/sjhdb160114e_2x.jpg?itok=ME2bkpvJ&timestamp=1436853264';
+  HDBCell(this.houses, this.i);
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +150,7 @@ class HDBCell extends StatelessWidget {
                   color: Colors.grey,
                   image: new DecorationImage(
                       image: new NetworkImage(
-                          image_url + movies[i]['poster_path']),
+                          image_url), // + houses[i]['poster_path']),
                       fit: BoxFit.cover),
                   boxShadow: [
                     new BoxShadow(
@@ -158,16 +167,15 @@ class HDBCell extends StatelessWidget {
                   child: new Column(
                     children: [
                       new Text(
-                        movies[i]['title'],
-                        style: new TextStyle(
-                            fontSize: 20.0,
-                            fontFamily: 'Arvo',
-                            fontWeight: FontWeight.bold,
-                            color: mainColor),
+                        houses[i]['town'] + " Block " + houses[i]['block'],
+                        style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                                color: Color(0xff7389ae), fontSize: 16.0)
+                        ),
                       ),
                       new Padding(padding: const EdgeInsets.all(2.0)),
                       new Text(
-                        movies[i]['overview'],
+                        houses[i]['flat_type'],
                         maxLines: 3,
                         style: new TextStyle(
                             color: const Color(0xff8785A4), fontFamily: 'Arvo'),

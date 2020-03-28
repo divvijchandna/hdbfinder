@@ -21,6 +21,7 @@ class HDBDetail extends StatelessWidget {
             color: Colors.black.withOpacity(0.5),
           ),
         ),
+
         new SingleChildScrollView(
           child: new Container(
             margin: const EdgeInsets.all(20.0),
