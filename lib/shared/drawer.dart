@@ -4,6 +4,8 @@ import 'package:hdbfinder/screens/home/hdb_settings.dart';
 import 'package:hdbfinder/screens/home/home.dart';
 import 'package:hdbfinder/screens/home/saved_searches.dart';
 import 'package:hdbfinder/services/auth.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 class MenuDrawer extends StatefulWidget {
 
@@ -23,7 +25,10 @@ class _MenuDrawerState extends State<MenuDrawer> {
           DrawerHeader(
             child: Text(
               'HDBFinder Menu',
-              style: TextStyle(color: Color(0xff3a506b), fontSize: 25),
+              style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                      color: Color(0xff3a506b), fontSize: 25.0)
+              ),
             ),
             decoration: BoxDecoration(
               color: Color(0xffb5BAD0),
@@ -31,7 +36,12 @@ class _MenuDrawerState extends State<MenuDrawer> {
           ),
           ListTile(
             leading: Icon(Icons.home),
-            title: Text('Home'),
+            title: Text('Home',
+              style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                      color: Color(0xff3a506b), fontSize: 16.0)
+              ),
+            ),
             onTap: () {
               Navigator.push(
                   context,
@@ -41,7 +51,12 @@ class _MenuDrawerState extends State<MenuDrawer> {
           ),
           ListTile(
             leading: Icon(Icons.save_alt),
-            title: Text('Saved Searches'),
+            title: Text('Saved Searches',
+              style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                      color: Color(0xff3a506b), fontSize: 16.0)
+              ),
+            ),
             onTap: () {
               Navigator.push(
                   context,
@@ -51,7 +66,13 @@ class _MenuDrawerState extends State<MenuDrawer> {
           ),
           ListTile(
             leading: Icon(Icons.settings),
-            title: Text('Settings'),
+            title: Text('Settings',
+              style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                      color: Color(0xff3a506b), fontSize: 16.0)
+              ),
+
+            ),
             onTap: () {
               Navigator.push(
                   context,
@@ -61,7 +82,12 @@ class _MenuDrawerState extends State<MenuDrawer> {
           ),
           ListTile(
             leading: Icon(Icons.exit_to_app),
-            title: Text('Logout'),
+            title: Text('Logout',
+              style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                      color: Color(0xff3a506b), fontSize: 16.0)
+              ),
+            ),
             onTap: () async {
               await _auth.signOut();
             },
