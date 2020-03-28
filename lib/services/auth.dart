@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hdbfinder/models/user.dart';
 import 'package:hdbfinder/screens/home/home.dart';
@@ -37,6 +38,11 @@ class AuthService {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
+      UserUpdateInfo userUpdateInfo = new UserUpdateInfo();
+      userUpdateInfo.displayName = name;
+      user.updateProfile(userUpdateInfo);
+      Firestore.instance.collection('users').document().setData(
+          {'email': email, 'displayName': name});
       return _userFromFirebaseUser(user);
     } catch(e) {
       print(e.toString());
@@ -49,6 +55,17 @@ class AuthService {
   Future signOut() async {
     try {
       return await _auth.signOut();
+    } catch(e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  //password reset
+  Future resetPassword(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      return 'Reset link sent successfully';
     } catch(e) {
       print(e.toString());
       return null;
