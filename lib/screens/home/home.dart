@@ -73,7 +73,7 @@ class _HomeState extends State<Home> {
                           focusedBorder: new OutlineInputBorder(
                               borderSide: new BorderSide(color: Color(0xff3a506b), width: 2.0)
                           ),
-                          hintText: 'Search',
+                          hintText: 'Search by Area',
                           prefixIcon: new Icon(
                               Icons.search,
                               color: Color(0xff3a506b)
@@ -83,7 +83,7 @@ class _HomeState extends State<Home> {
                           )
                       ),
                       style: TextStyle(
-                        color: Color(0xffe0e0e2),
+                        color: Color(0xff3a506b),
                       ),
                       onChanged: (val) {
                         setState(() => search = val);
@@ -93,33 +93,59 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
-            Padding(
-                padding: const EdgeInsets.fromLTRB(130.0, 10.0, 130.0, 20.0),
-                child: Container(
-                  width: 140.0,
-                  height: 40.0,
-                  child: RaisedButton(
-                    onPressed: () async {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SearchPage(
-                              search: search,
-                            )),
-                      );
-                    },
-                    child: Text(
-                      'Search',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xffe0e0e2),
+            Row(
+              children: <Widget>[
+                Padding(
+                    padding: const EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 20.0),
+                    child: Container(
+                      width: 100.0,
+                      height: 40.0,
+                      child: RaisedButton(
+                        onPressed: () async {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SearchPage(
+                                  search: search,
+                                )),
+                          );
+                        },
+                        child: Text(
+                          'Search',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xffe0e0e2),
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        color: Color(0xff3a506b),
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                    color: Color(0xff3a506b),
-                  ),
-                )
+                    )
+                ),
+                Padding(
+                    padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 20.0),
+                    child: Container(
+                      width: 200.0,
+                      height: 40.0,
+                      child: RaisedButton(
+                        onPressed: () async {
+
+                        },
+                        child: Text(
+                          'Search with Filters',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xffe0e0e2),
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        color: Color(0xff3a506b),
+                      ),
+                    )
+                ),
+              ],
             ),
             new HDBTitle(mainColor),
             new Expanded(
@@ -147,8 +173,6 @@ class _HomeState extends State<Home> {
 }
 
 Future<Map> getJson(String request) async {
-  //var apiKey = getApiKey();
-  //var url = 'http://api.themoviedb.org/3/discover/movie?api_key=${apiKey}';
   var response = await http.get(
       Uri.encodeFull(request),
       headers: {
