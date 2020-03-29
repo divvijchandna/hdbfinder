@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
+import 'package:google_fonts/google_fonts.dart';
 
 class HDBDetail extends StatelessWidget {
-  final movie;
-  var image_url = 'https://image.tmdb.org/t/p/w500/';
-  HDBDetail(this.movie);
+  final houses;
+  var image_url = 'https://picsum.photos/300?image=522';
+  HDBDetail(this.houses);
   Color mainColor = const Color(0xff3C3261);
 
   @override
@@ -12,7 +13,7 @@ class HDBDetail extends StatelessWidget {
     return new Scaffold(
       body: new Stack(fit: StackFit.expand, children: [
         new Image.network(
-          image_url + movie['poster_path'],
+          image_url,
           fit: BoxFit.cover,
         ),
         new BackdropFilter(
@@ -21,7 +22,6 @@ class HDBDetail extends StatelessWidget {
             color: Colors.black.withOpacity(0.5),
           ),
         ),
-
         new SingleChildScrollView(
           child: new Container(
             margin: const EdgeInsets.all(20.0),
@@ -37,7 +37,7 @@ class HDBDetail extends StatelessWidget {
                       borderRadius: new BorderRadius.circular(10.0),
                       image: new DecorationImage(
                           image: new NetworkImage(
-                              image_url + movie['poster_path']),
+                              image_url),
                           fit: BoxFit.cover),
                       boxShadow: [
                         new BoxShadow(
@@ -53,24 +53,93 @@ class HDBDetail extends StatelessWidget {
                     children: <Widget>[
                       new Expanded(
                           child: new Text(
-                            movie['title'],
-                            style: new TextStyle(
-                                color: Colors.white,
-                                fontSize: 30.0,
-                                fontFamily: 'Arvo'),
+                            houses["block"]+', '+houses["street_name"],
+                            style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                                    color: Colors.white, fontSize: 30))
                           )),
                       new Text(
-                        '${movie['vote_average']}/10',
-                        style: new TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.0,
-                            fontFamily: 'Arvo'),
+                        '\$'+'${houses["resale_price"]}',
+                        style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                                color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
                       )
                     ],
                   ),
                 ),
-                new Text(movie['overview'],style: new TextStyle(color: Colors.white, fontFamily: 'Arvo')),
-                new Padding(padding: const EdgeInsets.all(10.0)),
+                new Row(
+                  children: <Widget>[
+                  new Icon(Icons.home, color: Colors.white, size: 20) ,
+                new Text('\n'+'   Neighbourhood: '+ houses["town"] + '\n' ,
+                    style: GoogleFonts.montserrat(
+                        textStyle: TextStyle(
+                            color: Colors.white, fontSize: 18))
+                )
+                  ]),
+                new Row(
+                    children: <Widget>[
+                      new Icon(Icons.home, color: Colors.white, size: 20) ,
+                      new Text('\n'+'   Flat Type: ' + houses["flat_type"] +'\n' ,
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Colors.white, fontSize: 18))
+                      )
+                    ]),
+                new Row(
+                    children: <Widget>[
+                      new Icon(Icons.star_border, color: Colors.white, size: 20) ,
+                      new Text('\n'+'   Model: ' + houses["flat_model"] +'\n'  ,
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Colors.white, fontSize: 18))
+                      )
+                    ]),
+                new Row(
+                    children: <Widget>[
+                      new Icon(Icons.crop_square, color: Colors.white, size: 20) ,
+                      new Text('\n'+'   Area (sqm): ' + houses["floor_area_sqm"] +'\n' ,
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Colors.white, fontSize: 18))
+                      )
+                    ]),
+                new Row(
+                    children: <Widget>[
+                      new Icon(Icons.calendar_today, color: Colors.white, size: 20) ,
+                      new Text('\n'+'   Date: ' + houses["month"] +'\n'  ,
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Colors.white, fontSize: 18))
+                      )
+                    ]),
+                new Row(
+                    children: <Widget>[
+                      new Icon(Icons.calendar_today, color: Colors.white, size: 20) ,
+                      new Text('\n'+'   Lease Commencement: ' + houses["lease_commence_date"] +'\n'  ,
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Colors.white, fontSize: 18))
+                      )
+                    ]),
+                new Row(
+                    children: <Widget>[
+                      new Icon(Icons.calendar_today, color: Colors.white, size: 20) ,
+                      new Text('\n'+'   Remaining Lease: ' + houses["remaining_lease"] +'\n' ,
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Colors.white, fontSize: 18))
+                      )
+                    ]),
+                new Row(
+                    children: <Widget>[
+                      new Icon(Icons.location_city, color: Colors.white, size: 20) ,
+                      new Text('\n'+'   Storey: ' + houses["storey_range"] +'\n' ,
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Colors.white, fontSize: 18))
+                      )
+                    ]),
+
                 new Row(
                   children: <Widget>[
                     new Expanded(
@@ -79,7 +148,7 @@ class HDBDetail extends StatelessWidget {
                           height: 60.0,
                           alignment: Alignment.center,
                           child: new Text(
-                            'Rate Movie',
+                            'Rate Unit',
                             style: new TextStyle(
                                 color: Colors.white,
                                 fontFamily: 'Arvo',

@@ -264,12 +264,30 @@ class HDBCell extends StatelessWidget {
                         ),
                       ),
                       new Padding(padding: const EdgeInsets.all(2.0)),
-                      new Text(
-                        houses[i]['flat_type'],
-                        maxLines: 3,
-                        style: new TextStyle(
-                            color: const Color(0xff8785A4), fontFamily: 'Arvo'),
-                      )
+                      new Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(4.0),
+                          child: Icon(
+                            Icons.home,
+                            color: Color(0xff7389ae),
+                            size: 18.0,
+                          ),
+                        ),
+
+                        Padding(
+                          padding: EdgeInsets.all(4.0),
+                          child: new Text(
+                            houses[i]['flat_type'],
+                            maxLines: 3,
+                            style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                                    color: Color(0xff7389ae), fontSize: 12.0)
+                            ),
+                        ),
+                      ),
+                          ],
+                          )
                     ],
                     crossAxisAlignment: CrossAxisAlignment.start,
                   ),
