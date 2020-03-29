@@ -234,15 +234,24 @@ class HDBCell extends StatelessWidget {
                                 color: Color(0xff7389ae), fontSize: 16.0)
                         ),
                       ),
-                      new Padding(padding: const EdgeInsets.all(2.0)),
+                      new Padding(padding: const EdgeInsets.all(1.0)),
                       new Text(
                         houses[i]['flat_type'],
-                        maxLines: 3,
-                        style: new TextStyle(
-                            color: const Color(0xff8785A4), fontFamily: 'Arvo'),
+                        style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                                color: Color(0xff7389ae), fontSize: 16.0)
+                        ),
+                      ),
+                      new Text(
+                       "SGD " + houses[i]['resale_price'],
+                        style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                                color: Color(0xff7389ae), fontSize: 16.0)
+                        ),
                       )
                     ],
                     crossAxisAlignment: CrossAxisAlignment.start,
+
                   ),
                 )),
           ],
