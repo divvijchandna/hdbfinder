@@ -45,7 +45,7 @@ class SearchListings{
     retrieveNumber='&limit='+number.toString();
   }
 
-  void getListingsByFilter() async{
+  Future<void> getListingsByFilter() async{
     String query='';
 
     if(filters.filterByPrice==1){
@@ -78,7 +78,7 @@ class SearchListings{
     await listing.fetch(request);
   }
 
-  void getListingsByKeyword(String keyword) async{
+  Future<void> getListingsByKeyword(String keyword) async{
     request=request+'&q='+keyword;
     request=request+retrieveNumber;
 

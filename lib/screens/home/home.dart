@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:hdbfinder/screens/home/search_filters.dart';
 import 'package:hdbfinder/screens/home/search_page.dart';
 import 'package:hdbfinder/shared/drawer.dart';
 import 'package:http/http.dart' as http;
@@ -73,7 +74,7 @@ class _HomeState extends State<Home> {
                           focusedBorder: new OutlineInputBorder(
                               borderSide: new BorderSide(color: Color(0xff3a506b), width: 2.0)
                           ),
-                          hintText: 'Search by Area',
+                          hintText: 'Search',
                           prefixIcon: new Icon(
                               Icons.search,
                               color: Color(0xff3a506b)
@@ -107,7 +108,8 @@ class _HomeState extends State<Home> {
                             MaterialPageRoute(
                                 builder: (context) => SearchPage(
                                   search: search,
-                                )),
+                                )
+                            ),
                           );
                         },
                         child: Text(
@@ -130,7 +132,12 @@ class _HomeState extends State<Home> {
                       height: 40.0,
                       child: RaisedButton(
                         onPressed: () async {
-
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SearchFilters()
+                            ),
+                          );
                         },
                         child: Text(
                           'Search with Filters',

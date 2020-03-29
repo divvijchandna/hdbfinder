@@ -17,7 +17,7 @@ class FetchJSON{
 
   FetchJSON();
 
-  void fetch(String request) async{
+  Future<void> fetch(String request) async{
     this.jsonBody=json.decode(await fetchData(request));
   }
 }
