@@ -6,6 +6,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:hdbfinder/services/prediction/price_predict.dart';
 import 'package:hdbfinder/services/prediction/process_predict.dart';
 
+
 class HDBDetail extends StatelessWidget {
   final houses;
   final i;
@@ -178,6 +179,34 @@ class HDBDetail extends StatelessWidget {
                                   color: Colors.white, fontSize: 18))
                       )
                     ]),
+                Center(
+                    child: Container(
+                        child: SfCartesianChart(
+                            title: ChartTitle(text: 'Half yearly sales analysis'),
+                            // Initialize category axis
+                            primaryXAxis: CategoryAxis(),
+                            series: <ChartSeries>[
+                              // Initialize line series
+                              LineSeries<ResaleData, String>(
+                                  dataSource: [
+                                    // Bind data source
+                                    ResaleData('Jan', 35),
+                                    ResaleData('Feb', 28),
+                                    ResaleData('Mar', 34),
+                                    ResaleData('Apr', 32),
+                                    ResaleData('May', 40)
+                                  ],
+                                  xValueMapper: (SalesData sales, _) => sales.year,
+                                  yValueMapper: (SalesData sales, _) => sales.sales,
+                                  // Render the data label
+                                  dataLabelSettings:DataLabelSettings(isVisible : true)
+                              )
+                            ]
+                        )
+                    )
+                )
+
+
 
               ],
             ),
