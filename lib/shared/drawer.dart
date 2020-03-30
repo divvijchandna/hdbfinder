@@ -22,24 +22,16 @@ class _MenuDrawerState extends State<MenuDrawer> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          DrawerHeader(
-            child: Text(
-              'HDBFinder Menu',
-              style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(
-                      color: Color(0xff3a506b), fontSize: 25.0)
-              ),
-            ),
-            decoration: BoxDecoration(
-              color: Color(0xffb5BAD0),
-            ),
-          ),
+          _createHeader(),
           ListTile(
-            leading: Icon(Icons.home),
+            leading: Icon(
+                Icons.home,
+              color: Color(0xff003f91)
+            ),
             title: Text('Home',
               style: GoogleFonts.montserrat(
                   textStyle: TextStyle(
-                      color: Color(0xff3a506b), fontSize: 16.0)
+                      color: Color(0xff003f91), fontSize: 16.0)
               ),
             ),
             onTap: () {
@@ -50,11 +42,11 @@ class _MenuDrawerState extends State<MenuDrawer> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.save_alt),
+            leading: Icon(Icons.save_alt, color: Color(0xff003f91)),
             title: Text('Saved Searches',
               style: GoogleFonts.montserrat(
                   textStyle: TextStyle(
-                      color: Color(0xff3a506b), fontSize: 16.0)
+                      color: Color(0xff003f91), fontSize: 16.0)
               ),
             ),
             onTap: () {
@@ -65,11 +57,11 @@ class _MenuDrawerState extends State<MenuDrawer> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.settings),
+            leading: Icon(Icons.settings, color: Color(0xff003f91)),
             title: Text('Settings',
               style: GoogleFonts.montserrat(
                   textStyle: TextStyle(
-                      color: Color(0xff3a506b), fontSize: 16.0)
+                      color: Color(0xff003f91), fontSize: 16.0)
               ),
 
             ),
@@ -81,11 +73,11 @@ class _MenuDrawerState extends State<MenuDrawer> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.exit_to_app),
+            leading: Icon(Icons.exit_to_app, color: Color(0xff003f91)),
             title: Text('Logout',
               style: GoogleFonts.montserrat(
                   textStyle: TextStyle(
-                      color: Color(0xff3a506b), fontSize: 16.0)
+                      color: Color(0xff003f91), fontSize: 16.0)
               ),
             ),
             onTap: () async {
@@ -97,3 +89,28 @@ class _MenuDrawerState extends State<MenuDrawer> {
     );
   }
 }
+
+
+Widget _createHeader() {
+  return DrawerHeader(
+      margin: EdgeInsets.zero,
+      padding: EdgeInsets.zero,
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              fit: BoxFit.fill,
+              image:  AssetImage('assets/images/singapore.jpg'))),
+      child: Stack(children: <Widget>[
+        Positioned(
+            bottom: 130.0,
+            left: 16.0,
+            child: Text("HDBFinder Menu",
+
+                style: GoogleFonts.montserrat(
+                    textStyle: TextStyle(
+                        color: Color(0xff0a050a), fontSize: 20.0, fontWeight: FontWeight.w700)
+                ),
+            )),
+      ]));
+}
+
+

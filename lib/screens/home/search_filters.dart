@@ -30,12 +30,12 @@ class _SearchFiltersState extends State<SearchFilters> {
       drawer: MenuDrawer(),
       backgroundColor: Color(0xffe0e0e2),
       appBar: AppBar(
-        backgroundColor: Color(0xff3a506b),
+        backgroundColor: Color(0xff003f91),
         centerTitle: true,
         title: Text('Search Results',
           style: GoogleFonts.montserrat(
               textStyle: TextStyle(
-                  color: Color(0xffe0e0e2), fontSize: 22.0, fontWeight: FontWeight.bold)
+                  color: Color(0xffe5f4e3), fontSize: 22.0, fontWeight: FontWeight.bold)
           ),
         ),
       ),
@@ -48,7 +48,7 @@ class _SearchFiltersState extends State<SearchFilters> {
             Padding(
               padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
               child: RangeSlider(
-                activeColor: Color(0xff3a506b),
+                activeColor: Color(0xff559ad4),
                 divisions: 26,
                 labels: _priceLabels,
                 min: 0,
@@ -67,14 +67,14 @@ class _SearchFiltersState extends State<SearchFilters> {
               child: Text('Price Range (SGD)',
                 style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
-                        color: Color(0xff3a506b), fontSize: 22.0, fontWeight: FontWeight.bold)
+                        color: Color(0xff5a295a), fontSize: 22.0, fontWeight: FontWeight.bold)
                 ),
               ),
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
               child: RangeSlider(
-                activeColor: Color(0xff3a506b),
+                activeColor: Color(0xff559ad4),
                 divisions: 16,
                 labels: _areaLabels,
                 min: 0,
@@ -93,7 +93,7 @@ class _SearchFiltersState extends State<SearchFilters> {
               child: Text('Area Range (Square Metres)',
                 style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
-                        color: Color(0xff3a506b), fontSize: 22.0, fontWeight: FontWeight.bold)
+                        color: Color(0xff5a295a), fontSize: 22.0, fontWeight: FontWeight.bold)
                 ),
               ),
             ),
@@ -106,7 +106,7 @@ class _SearchFiltersState extends State<SearchFilters> {
                 hint: Text('Apartment Type',
                   style: GoogleFonts.montserrat(
                       textStyle: TextStyle(
-                          color: Color(0xff3a506b), fontSize: 22.0, fontWeight: FontWeight.bold
+                          color: Color(0xff003f91), fontSize: 22.0, fontWeight: FontWeight.bold
                       )
                   ),
                 ),
@@ -174,7 +174,7 @@ class _SearchFiltersState extends State<SearchFilters> {
                 ),
                 underline: Container(
                   height: 2,
-                  color: Color(0xff3a506b),
+                  color: Color(0xff003f91),
                 ),
               ),
             ),
@@ -333,7 +333,7 @@ class _SearchFiltersState extends State<SearchFilters> {
                 ),
                 underline: Container(
                   height: 2,
-                  color: Color(0xff3a506b),
+                  color: Color(0xff003f91),
                 ),
               ),
             ),
@@ -535,7 +535,7 @@ class _SearchFiltersState extends State<SearchFilters> {
                 ),
                 underline: Container(
                   height: 2,
-                  color: Color(0xff3a506b),
+                  color: Color(0xff003f91),
                 ),
               ),
             ),
@@ -612,7 +612,7 @@ class _SearchFiltersState extends State<SearchFilters> {
                 padding: const EdgeInsets.fromLTRB(132.5, 20.0, 132.5, 20.0),
                 child: Container(
                   alignment: Alignment.center,
-                  width: 100.0,
+                  width: 160.0,
                   height: 40.0,
                   child: RaisedButton(
                     onPressed: () async {
@@ -634,14 +634,14 @@ class _SearchFiltersState extends State<SearchFilters> {
                     },
                     child: Text(
                       'Search',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xffe0e0e2),
+                      style: GoogleFonts.montserrat(
+                        textStyle: TextStyle(
+                            color: Color(0xffe5f4e3), fontSize: 22.0
+                        ),
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    color: Color(0xff3a506b),
+                    color: Color(0xff5a295a),
                   ),
                 )
             ),

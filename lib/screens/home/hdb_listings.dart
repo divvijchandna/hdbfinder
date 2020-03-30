@@ -134,7 +134,7 @@ class HDBListState extends State<HDBList> {
                       onPressed: () {
                         Navigator.push(context,
                             new MaterialPageRoute(builder: (context) {
-                              return new HDBDetail(houses[i]);
+                              return new HDBDetail(houses[i], i);
                             }));
                       },
                       color: Colors.white,

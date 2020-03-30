@@ -79,14 +79,14 @@ class _HomeState extends State<Home> {
                           hintText: 'Search by Keyword',
                           prefixIcon: new Icon(
                               Icons.search,
-                              color: Color(0xff17509b)
+                              color: Color(0xff559ad4)
                           ),
                           hintStyle: TextStyle(
-                              color: Color(0xff17509b)
+                              color: Color(0xff559ad4)
                           )
                       ),
                       style: TextStyle(
-                        color: Color(0xff17509b),
+                        color: Color(0xff559ad4),
                       ),
                       onChanged: (val) {
                         setState(() => search = val);
