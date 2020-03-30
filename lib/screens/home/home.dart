@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:hdbfinder/screens/home/search_filters.dart';
+//import 'package:hdbfinder/screens/home/search_filters.dart';
 import 'package:hdbfinder/screens/home/search_page.dart';
 import 'package:hdbfinder/shared/drawer.dart';
 import 'package:http/http.dart' as http;
@@ -43,12 +43,12 @@ class _HomeState extends State<Home> {
       drawer: MenuDrawer(),
       backgroundColor: Color(0xffe0e0e2),
       appBar: AppBar(
-        backgroundColor: Color(0xff003f91),
+        backgroundColor: Color(0xff17509b),
         centerTitle: true,
         title: Text('Home',
           style: GoogleFonts.montserrat(
               textStyle: TextStyle(
-                  color: Color(0xffe0e0e2), fontSize: 22.0, fontWeight: FontWeight.bold)
+                  color: Color(0xffe0e0e2), fontSize: 32.0)
           ),
         ),
       ),
@@ -71,22 +71,22 @@ class _HomeState extends State<Home> {
                       autofocus: false,
                       decoration: InputDecoration(
                           enabledBorder: new OutlineInputBorder(
-                              borderSide: new BorderSide(color: Color(0xff003f91), width: 2.0)
+                              borderSide: new BorderSide(color: Color(0xff17509b), width: 2.0)
                           ),
                           focusedBorder: new OutlineInputBorder(
-                              borderSide: new BorderSide(color: Color(0xff003f91), width: 2.0)
+                              borderSide: new BorderSide(color: Color(0xff17509b), width: 2.0)
                           ),
                           hintText: 'Search by Keyword',
                           prefixIcon: new Icon(
                               Icons.search,
-                              color: Color(0xff003f91)
+                              color: Color(0xff17509b)
                           ),
                           hintStyle: TextStyle(
-                              color: Color(0xff003f91)
+                              color: Color(0xff17509b)
                           )
                       ),
                       style: TextStyle(
-                        color: Color(0xff003f91),
+                        color: Color(0xff17509b),
                       ),
                       onChanged: (val) {
                         setState(() => search = val);
@@ -123,7 +123,7 @@ class _HomeState extends State<Home> {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        color: Color(0xff003f91),
+                        color: Color(0xff17509b),
                       ),
                     )
                 ),
@@ -145,11 +145,11 @@ class _HomeState extends State<Home> {
                           'Search with Filters',
                           style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
-                                    color: Color(0xffe5f4e3), fontSize: 17.0, fontWeight: FontWeight.normal)
-                            ),
+                                  color: Color(0xffe5f4e3), fontSize: 17.0, fontWeight: FontWeight.normal)
+                          ),
                           textAlign: TextAlign.center,
                         ),
-                        color: Color(0xff003f91),
+                        color: Color(0xff17509b),
                       ),
                     )
                 ),
@@ -166,7 +166,7 @@ class _HomeState extends State<Home> {
                       onPressed: () {
                         Navigator.push(context,
                             new MaterialPageRoute(builder: (context) {
-                              return new HDBDetail(houses[i]);
+                              return new HDBDetail(houses[i], i);
                             }));
                       },
                       color: Colors.white,
@@ -206,7 +206,7 @@ class HDBTitle extends StatelessWidget {
         'Featured',
         style: GoogleFonts.montserrat(
             textStyle: TextStyle(
-                color: Color(0xff6d326d), fontSize: 32.0, fontWeight: FontWeight.bold)
+                color: Color(0xff6d326d), fontSize: 32.0)
         ),
       ),
     );
@@ -279,58 +279,58 @@ class HDBCell extends StatelessWidget {
                         houses[i]['town'] + " Block " + houses[i]['block'],
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
-                                color: Color(0xff003f91), fontSize: 18.0)
+                                color: Color(0xff17509b), fontSize: 18.0)
                         ),
                       ),
                       new Padding(padding: const EdgeInsets.all(2.0)),
                       new Row(
-                      children: [
+                        children: [
 
-                        Padding(
-                          padding: EdgeInsets.all(4.0),
-                          child: Icon(
-                            Icons.home,
-                            color: Color(0xff6d326d),
-                            size: 18.0,
-                          ),
-                        ),
-
-                        Padding(
-                          padding: EdgeInsets.all(4.0),
-                          child: new Text(
-                            houses[i]['flat_type'],
-                            maxLines: 3,
-                            style: GoogleFonts.montserrat(
-                                textStyle: TextStyle(
-                                    color: Color(0xff6d326d), fontSize: 14.0)
+                          Padding(
+                            padding: EdgeInsets.all(4.0),
+                            child: Icon(
+                              Icons.home,
+                              color: Color(0xff6d326d),
+                              size: 18.0,
                             ),
-                        ),
-                      ),
-                        Spacer(),
-
-                        Padding(
-                          padding: EdgeInsets.all(0.0),
-                          child: Icon(
-                            Icons.attach_money,
-                            color: Color(0xff6d326d),
-                            size: 18.0,
                           ),
-                        ),
 
-                        Padding(
-                          padding: EdgeInsets.all(0.0),
-                          child: new Text(
-                            houses[i]['resale_price'],
+                          Padding(
+                            padding: EdgeInsets.all(4.0),
+                            child: new Text(
+                              houses[i]['flat_type'],
+                              maxLines: 3,
                               style: GoogleFonts.montserrat(
                                   textStyle: TextStyle(
                                       color: Color(0xff6d326d), fontSize: 14.0)
-
                               ),
+                            ),
+                          ),
+                          Spacer(),
 
+                          Padding(
+                            padding: EdgeInsets.all(0.0),
+                            child: Icon(
+                              Icons.attach_money,
+                              color: Color(0xff6d326d),
+                              size: 18.0,
+                            ),
+                          ),
+
+                          Padding(
+                              padding: EdgeInsets.all(0.0),
+                              child: new Text(
+                                houses[i]['resale_price'],
+                                style: GoogleFonts.montserrat(
+                                    textStyle: TextStyle(
+                                        color: Color(0xff6d326d), fontSize: 14.0)
+
+                                ),
+
+                              )
                           )
-                        )
-                          ],
-                          )
+                        ],
+                      )
                     ],
                     crossAxisAlignment: CrossAxisAlignment.start,
                   ),

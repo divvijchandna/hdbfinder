@@ -17,12 +17,12 @@ class _SettingsState extends State<Settings> {
       drawer: MenuDrawer(),
       backgroundColor: Color(0xffe0e0e2),
       appBar: AppBar(
-        backgroundColor: Color(0xff003f91),
+        backgroundColor: Color(0xff17509b),
         centerTitle: true,
         title: Text('Settings',
           style: GoogleFonts.montserrat(
               textStyle: TextStyle(
-                  color: Color(0xffe5f4e3), fontSize: 22.0, fontWeight: FontWeight.w700)
+                  color: Color(0xffe5f4e3), fontSize: 32.0)
           ),
         ),
       ),
