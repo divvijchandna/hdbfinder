@@ -202,6 +202,18 @@ class HDBCell extends StatelessWidget {
   var image_url = 'https://www.straitstimes.com/sites/default/files/styles/article_pictrure_780x520_/public/articles/2014/01/16/sjhdb160114e_2x.jpg?itok=ME2bkpvJ&timestamp=1436853264';
   HDBCell(this.houses, this.i);
 
+  final List<String> imageList = ["https://picsum.photos/300?image=522",
+    "https://media.istockphoto.com/photos/public-housing-in-bishan-singapore-picture-id516264474?s=2048x2048",
+    "https://cmg.scdn4.secure.raxcdn.com/sites/default/files/imagecache/600x360/news/singapore%20hdb%20homes.jpg",
+    "https://www.straitstimes.com/sites/default/files/styles/article_pictrure_780x520_/public/articles/2014/01/16/sjhdb160114e_2x.jpg?itok=ME2bkpvJ&timestamp=1436853264",
+    "https://upload.wikimedia.org/wikipedia/commons/5/5f/Housing_and_Development_Board_flats%2C_Bukit_Batok_West_Avenue_5%2C_Singapore_-_20050528.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/8/8d/Edgedale_10%2C_Jan_06.JPG",
+    "https://www.asiaone.com/sites/default/files/styles/article_main_image/public/original_images/Oct2014/20141025_bto_tnp.jpg?itok=V0RGzBns",
+    "https://i.pinimg.com/564x/15/73/ff/1573ff51612dcb40b50a9a3927caf1c6.jpg",
+    "https://www.todayonline.com/sites/default/files/boontiong_pt_1_0.jpg",
+    "https://media.homeanddecor.com.sg/public/2017/02/57693-06q8038.jpg"
+  ];
+
   @override
   Widget build(BuildContext context) {
     return new Column(
@@ -222,7 +234,7 @@ class HDBCell extends StatelessWidget {
                   color: Colors.grey,
                   image: new DecorationImage(
                       image: new NetworkImage(
-                          image_url), // + houses[i]['poster_path']),
+                          imageList[i% (imageList.length)]), // + houses[i]['poster_path']),
                       fit: BoxFit.cover),
                   boxShadow: [
                     new BoxShadow(
