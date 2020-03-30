@@ -28,15 +28,6 @@ class _SearchPageState extends State<SearchPage> {
 
   void performSearch(String search, int priceMin, int priceMax, int areaMin, int areaMax, String typeValue, String modelValue, String townValue, String sortValue) async {
 
-//    print(search);
-//    print(priceMin);
-//    print(priceMax);
-//    print(areaMin);
-//    print(areaMax);
-//    print(typeValue);
-//    print(modelValue);
-//    print(townValue);
-//    print(sortValue);
     var l = SearchListings();
     int flagTown = 0, flagModel = 0, flagType = 0;
     if(search != null) {
@@ -50,7 +41,7 @@ class _SearchPageState extends State<SearchPage> {
       if(townValue != null)
         flagTown = 1;
       l.setFilters(1, 1, flagTown, flagModel, flagType);
-      l.setPriceRange(280000, 290000);
+      l.setPriceRange(priceMin, priceMax);
       l.setAreaRange(areaMin, areaMax);
       if(flagType == 1)
         l.setType(typeValue);
@@ -59,12 +50,8 @@ class _SearchPageState extends State<SearchPage> {
       if(flagTown == 1)
         l.setTown(townValue);
       l.setSortBy(sortValue);
-//      l.setFilters(1, 0, 1, 0, 0);
-//      l.setSortBy("resale_price");
-//      l.setPriceRange(200000, 210000);
-//      l.setTown("jurong east");
+
       await l.getListingsByFilter();
-      print(l.listing.jsonBody);
     }
 
     setState(() {
