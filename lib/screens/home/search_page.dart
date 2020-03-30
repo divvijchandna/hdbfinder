@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:hdbfinder/screens/home/hdb_detail.dart';
+import 'package:hdbfinder/screens/home/search_filters.dart';
 import 'package:hdbfinder/services/search_request/listing_retrieve.dart';
 import 'package:hdbfinder/shared/drawer.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SearchPage extends StatefulWidget {
   final String search;
+  final int priceMin;
+  final int priceMax;
+  final int areaMin;
+  final int areaMax;
+  final String typeValue;
+  final String modelValue;
+  final String townValue;
+  final String sortValue;
 
-  SearchPage({this.search});
+  SearchPage({this.search, this.priceMin, this.priceMax, this.areaMin, this.areaMax, this.typeValue, this.modelValue, this.townValue, this.sortValue});
   @override
   _SearchPageState createState() => _SearchPageState();
 }
@@ -17,9 +26,46 @@ class _SearchPageState extends State<SearchPage> {
   var houses;
   Color mainColor = const Color(0xff3a506b);
 
-  void performSearch(String search) async {
+  void performSearch(String search, int priceMin, int priceMax, int areaMin, int areaMax, String typeValue, String modelValue, String townValue, String sortValue) async {
+
+//    print(search);
+//    print(priceMin);
+//    print(priceMax);
+//    print(areaMin);
+//    print(areaMax);
+//    print(typeValue);
+//    print(modelValue);
+//    print(townValue);
+//    print(sortValue);
     var l = SearchListings();
-    await l.getListingsByKeyword(search);
+    int flagTown = 0, flagModel = 0, flagType = 0;
+    if(search != null) {
+      await l.getListingsByKeyword(search);
+    }
+    else {
+      if(typeValue != null)
+        flagType = 1;
+      if(modelValue != null)
+        flagModel = 1;
+      if(townValue != null)
+        flagTown = 1;
+      l.setFilters(1, 1, flagTown, flagModel, flagType);
+      l.setPriceRange(280000, 290000);
+      l.setAreaRange(areaMin, areaMax);
+      if(flagType == 1)
+        l.setType(typeValue);
+      if(flagModel == 1)
+        l.setModel(modelValue);
+      if(flagTown == 1)
+        l.setTown(townValue);
+      l.setSortBy(sortValue);
+//      l.setFilters(1, 0, 1, 0, 0);
+//      l.setSortBy("resale_price");
+//      l.setPriceRange(200000, 210000);
+//      l.setTown("jurong east");
+      await l.getListingsByFilter();
+      print(l.listing.jsonBody);
+    }
 
     setState(() {
       houses = l.listing.jsonBody['result']['records'];
@@ -68,7 +114,7 @@ class _SearchPageState extends State<SearchPage> {
                           focusedBorder: new OutlineInputBorder(
                               borderSide: new BorderSide(color: Color(0xff3a506b), width: 2.0)
                           ),
-                          hintText: 'Search',
+                          hintText: 'Search by Keyword',
                           prefixIcon: new Icon(
                               Icons.search,
                               color: Color(0xff3a506b)
@@ -126,7 +172,12 @@ class _SearchPageState extends State<SearchPage> {
                       height: 40.0,
                       child: RaisedButton(
                         onPressed: () async {
-
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SearchFilters()
+                            ),
+                          );
                         },
                         child: Text(
                           'Search with Filters',
@@ -154,7 +205,9 @@ class _SearchPageState extends State<SearchPage> {
                         Navigator.push(context,
                             new MaterialPageRoute(builder: (context) {
                               return new HDBDetail(houses[i]);
-                            }));
+                            }
+                            )
+                        );
                       },
                       color: Colors.white,
                     );
@@ -169,7 +222,7 @@ class _SearchPageState extends State<SearchPage> {
   void initState() {
     super.initState();
     setState(() {
-      performSearch(widget.search);
+      performSearch(widget.search, widget.priceMin, widget.priceMax, widget.areaMin, widget.areaMax, widget.typeValue, widget.modelValue, widget.townValue, widget.sortValue);
     });
   }
 }

@@ -76,7 +76,7 @@ class _HomeState extends State<Home> {
                           focusedBorder: new OutlineInputBorder(
                               borderSide: new BorderSide(color: Color(0xff3a506b), width: 2.0)
                           ),
-                          hintText: 'Search',
+                          hintText: 'Search by Keyword',
                           prefixIcon: new Icon(
                               Icons.search,
                               color: Color(0xff3a506b)
