@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'config.dart';
 import 'hdb_detail.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:math';
+
 
 
 
@@ -114,10 +116,10 @@ class _HomeState extends State<Home> {
                         },
                         child: Text(
                           'Search',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w700,
-                            color: Color(0xffe0e0e2),
+
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Color(0xffe0e0e2), fontSize: 18.0, fontWeight: FontWeight.w700)
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -141,11 +143,10 @@ class _HomeState extends State<Home> {
                         },
                         child: Text(
                           'Search with Filters',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w700,
-                            color: Color(0xffe0e0e2),
-                          ),
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                    color: Color(0xffe0e0e2), fontSize: 17.0, fontWeight: FontWeight.w700)
+                            ),
                           textAlign: TextAlign.center,
                         ),
                         color: Color(0xff3a506b),
@@ -212,13 +213,31 @@ class HDBTitle extends StatelessWidget {
   }
 }
 
+
+
+
 class HDBCell extends StatelessWidget {
 
   final houses;
   final i;
   Color mainColor = const Color(0xff3C3261);
-  var image_url = 'https://www.straitstimes.com/sites/default/files/styles/article_pictrure_780x520_/public/articles/2014/01/16/sjhdb160114e_2x.jpg?itok=ME2bkpvJ&timestamp=1436853264';
+  var image_url = 'https://picsum.photos/300?image=522';
   HDBCell(this.houses, this.i);
+
+  final List<String> imageList = ["https://picsum.photos/300?image=522",
+    "https://media.istockphoto.com/photos/public-housing-in-bishan-singapore-picture-id516264474?s=2048x2048",
+    "https://cmg.scdn4.secure.raxcdn.com/sites/default/files/imagecache/600x360/news/singapore%20hdb%20homes.jpg",
+    "https://www.straitstimes.com/sites/default/files/styles/article_pictrure_780x520_/public/articles/2014/01/16/sjhdb160114e_2x.jpg?itok=ME2bkpvJ&timestamp=1436853264",
+    "https://upload.wikimedia.org/wikipedia/commons/5/5f/Housing_and_Development_Board_flats%2C_Bukit_Batok_West_Avenue_5%2C_Singapore_-_20050528.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/8/8d/Edgedale_10%2C_Jan_06.JPG",
+    "https://www.asiaone.com/sites/default/files/styles/article_main_image/public/original_images/Oct2014/20141025_bto_tnp.jpg?itok=V0RGzBns",
+    "https://i.pinimg.com/564x/15/73/ff/1573ff51612dcb40b50a9a3927caf1c6.jpg",
+    "https://www.todayonline.com/sites/default/files/boontiong_pt_1_0.jpg",
+    "https://media.homeanddecor.com.sg/public/2017/02/57693-06q8038.jpg"
+  ];
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -240,7 +259,7 @@ class HDBCell extends StatelessWidget {
                   color: Colors.grey,
                   image: new DecorationImage(
                       image: new NetworkImage(
-                          image_url), // + houses[i]['poster_path']),
+                          imageList[i% (imageList.length)]), // + houses[i]['poster_path']),
                       fit: BoxFit.cover),
                   boxShadow: [
                     new BoxShadow(
@@ -260,12 +279,13 @@ class HDBCell extends StatelessWidget {
                         houses[i]['town'] + " Block " + houses[i]['block'],
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
-                                color: Color(0xff7389ae), fontSize: 16.0)
+                                color: Color(0xff3A506B), fontSize: 18.0)
                         ),
                       ),
                       new Padding(padding: const EdgeInsets.all(2.0)),
                       new Row(
                       children: [
+
                         Padding(
                           padding: EdgeInsets.all(4.0),
                           child: Icon(
@@ -282,10 +302,33 @@ class HDBCell extends StatelessWidget {
                             maxLines: 3,
                             style: GoogleFonts.montserrat(
                                 textStyle: TextStyle(
-                                    color: Color(0xff7389ae), fontSize: 12.0)
+                                    color: Color(0xff7389ae), fontSize: 14.0)
                             ),
                         ),
                       ),
+                        Spacer(),
+
+                        Padding(
+                          padding: EdgeInsets.all(0.0),
+                          child: Icon(
+                            Icons.attach_money,
+                            color: Color(0xff7389ae),
+                            size: 18.0,
+                          ),
+                        ),
+
+                        Padding(
+                          padding: EdgeInsets.all(0.0),
+                          child: new Text(
+                            houses[i]['resale_price'],
+                              style: GoogleFonts.montserrat(
+                                  textStyle: TextStyle(
+                                      color: Color(0xff7389ae), fontSize: 14.0)
+
+                              ),
+
+                          )
+                        )
                           ],
                           )
                     ],
