@@ -68,7 +68,7 @@ class _SearchPageState extends State<SearchPage> {
       drawer: MenuDrawer(),
       backgroundColor: Color(0xffe0e0e2),
       appBar: AppBar(
-        backgroundColor: Color(0xff3a506b),
+        backgroundColor: Color(0xff003f91),
         centerTitle: true,
         title: Text('Search Results',
           style: GoogleFonts.montserrat(
@@ -104,10 +104,10 @@ class _SearchPageState extends State<SearchPage> {
                           hintText: 'Search by Keyword',
                           prefixIcon: new Icon(
                               Icons.search,
-                              color: Color(0xff3a506b)
+                              color: Color(0xff003f91)
                           ),
                           hintStyle: TextStyle(
-                              color: Color(0xff3a506b)
+                              color: Color(0xff003f91)
                           )
                       ),
                       style: TextStyle(
@@ -227,7 +227,7 @@ class HDBTitle extends StatelessWidget {
         'Listings',
         style: GoogleFonts.montserrat(
             textStyle: TextStyle(
-                color: Color(0xff7389ae), fontSize: 32.0)
+                color: Color(0xff6d326d), fontSize: 32.0)
         ),
       ),
     );

@@ -9,7 +9,7 @@ import 'config.dart';
 import 'hdb_detail.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:math';
-
+import 'search_filters.dart';
 
 
 
@@ -166,7 +166,7 @@ class _HomeState extends State<Home> {
                       onPressed: () {
                         Navigator.push(context,
                             new MaterialPageRoute(builder: (context) {
-                              return new HDBDetail(houses[i], i);
+                              return new HDBDetail(houses[i], i); //pass i later if you want
                             }));
                       },
                       color: Colors.white,
@@ -290,7 +290,7 @@ class HDBCell extends StatelessWidget {
                             padding: EdgeInsets.all(4.0),
                             child: Icon(
                               Icons.home,
-                              color: Color(0xff6d326d),
+                              color: Color(0xff875787),
                               size: 18.0,
                             ),
                           ),
@@ -302,7 +302,7 @@ class HDBCell extends StatelessWidget {
                               maxLines: 3,
                               style: GoogleFonts.montserrat(
                                   textStyle: TextStyle(
-                                      color: Color(0xff6d326d), fontSize: 14.0)
+                                      color: Color(0xff875787), fontSize: 14.0)
                               ),
                             ),
                           ),
@@ -312,7 +312,7 @@ class HDBCell extends StatelessWidget {
                             padding: EdgeInsets.all(0.0),
                             child: Icon(
                               Icons.attach_money,
-                              color: Color(0xff6d326d),
+                              color: Color(0xff875787),
                               size: 18.0,
                             ),
                           ),
@@ -323,7 +323,7 @@ class HDBCell extends StatelessWidget {
                                 houses[i]['resale_price'],
                                 style: GoogleFonts.montserrat(
                                     textStyle: TextStyle(
-                                        color: Color(0xff6d326d), fontSize: 14.0)
+                                        color: Color(0xff875787), fontSize: 14.0)
 
                                 ),
 
