@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
       drawer: MenuDrawer(),
       backgroundColor: Color(0xffe0e0e2),
       appBar: AppBar(
-        backgroundColor: Color(0xff3a506b),
+        backgroundColor: Color(0xff003f91),
         centerTitle: true,
         title: Text('Home',
           style: GoogleFonts.montserrat(
@@ -71,22 +71,22 @@ class _HomeState extends State<Home> {
                       autofocus: false,
                       decoration: InputDecoration(
                           enabledBorder: new OutlineInputBorder(
-                              borderSide: new BorderSide(color: Color(0xff3a506b), width: 2.0)
+                              borderSide: new BorderSide(color: Color(0xff003f91), width: 2.0)
                           ),
                           focusedBorder: new OutlineInputBorder(
-                              borderSide: new BorderSide(color: Color(0xff3a506b), width: 2.0)
+                              borderSide: new BorderSide(color: Color(0xff003f91), width: 2.0)
                           ),
                           hintText: 'Search by Keyword',
                           prefixIcon: new Icon(
                               Icons.search,
-                              color: Color(0xff3a506b)
+                              color: Color(0xff003f91)
                           ),
                           hintStyle: TextStyle(
-                              color: Color(0xff3a506b)
+                              color: Color(0xff003f91)
                           )
                       ),
                       style: TextStyle(
-                        color: Color(0xff3a506b),
+                        color: Color(0xff003f91),
                       ),
                       onChanged: (val) {
                         setState(() => search = val);
@@ -119,11 +119,11 @@ class _HomeState extends State<Home> {
 
                           style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
-                                  color: Color(0xffe0e0e2), fontSize: 18.0, fontWeight: FontWeight.w700)
+                                  color: Color(0xffe5f4e3), fontSize: 18.0, fontWeight: FontWeight.normal)
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        color: Color(0xff3a506b),
+                        color: Color(0xff003f91),
                       ),
                     )
                 ),
@@ -145,11 +145,11 @@ class _HomeState extends State<Home> {
                           'Search with Filters',
                           style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
-                                    color: Color(0xffe0e0e2), fontSize: 17.0, fontWeight: FontWeight.w700)
+                                    color: Color(0xffe5f4e3), fontSize: 17.0, fontWeight: FontWeight.normal)
                             ),
                           textAlign: TextAlign.center,
                         ),
-                        color: Color(0xff3a506b),
+                        color: Color(0xff003f91),
                       ),
                     )
                 ),
@@ -206,7 +206,7 @@ class HDBTitle extends StatelessWidget {
         'Featured',
         style: GoogleFonts.montserrat(
             textStyle: TextStyle(
-                color: Color(0xff7389ae), fontSize: 32.0)
+                color: Color(0xff6d326d), fontSize: 32.0, fontWeight: FontWeight.bold)
         ),
       ),
     );
@@ -279,7 +279,7 @@ class HDBCell extends StatelessWidget {
                         houses[i]['town'] + " Block " + houses[i]['block'],
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
-                                color: Color(0xff3A506B), fontSize: 18.0)
+                                color: Color(0xff003f91), fontSize: 18.0)
                         ),
                       ),
                       new Padding(padding: const EdgeInsets.all(2.0)),
@@ -290,7 +290,7 @@ class HDBCell extends StatelessWidget {
                           padding: EdgeInsets.all(4.0),
                           child: Icon(
                             Icons.home,
-                            color: Color(0xff7389ae),
+                            color: Color(0xff6d326d),
                             size: 18.0,
                           ),
                         ),
@@ -302,7 +302,7 @@ class HDBCell extends StatelessWidget {
                             maxLines: 3,
                             style: GoogleFonts.montserrat(
                                 textStyle: TextStyle(
-                                    color: Color(0xff7389ae), fontSize: 14.0)
+                                    color: Color(0xff6d326d), fontSize: 14.0)
                             ),
                         ),
                       ),
@@ -312,7 +312,7 @@ class HDBCell extends StatelessWidget {
                           padding: EdgeInsets.all(0.0),
                           child: Icon(
                             Icons.attach_money,
-                            color: Color(0xff7389ae),
+                            color: Color(0xff6d326d),
                             size: 18.0,
                           ),
                         ),
@@ -323,7 +323,7 @@ class HDBCell extends StatelessWidget {
                             houses[i]['resale_price'],
                               style: GoogleFonts.montserrat(
                                   textStyle: TextStyle(
-                                      color: Color(0xff7389ae), fontSize: 14.0)
+                                      color: Color(0xff6d326d), fontSize: 14.0)
 
                               ),
 
