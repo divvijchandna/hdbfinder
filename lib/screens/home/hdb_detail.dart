@@ -1,19 +1,34 @@
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:math';
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:hdbfinder/services/prediction/price_predict.dart';
+import 'package:hdbfinder/services/prediction/process_predict.dart';
 
 class HDBDetail extends StatelessWidget {
   final houses;
-  var image_url = 'https://picsum.photos/300?image=522';
-  HDBDetail(this.houses);
+  final i;
+  var image_url = ['https://s3-ap-southeast-1.amazonaws.com/homebyhitcheed-staging/images/da97d034-a526-4cee-b401-8627f40a2aab/thumbs/SSR_4169.JPG?1535097721',
+  'https://s3-ap-southeast-1.amazonaws.com/homebyhitcheed-staging/images/29d3f480-cb12-41f7-94c6-7a859c68114a/thumbs/L_DSC2611.jpg?1535099398',
+  'https://s3-ap-southeast-1.amazonaws.com/homebyhitcheed-staging/images/107118d2-aa80-4f27-a66e-1cf3d965d84e/thumbs/IMG_8959.jpg?1535122973',
+  'https://s3-ap-southeast-1.amazonaws.com/homebyhitcheed-staging/images/d8e2ae83-1b3c-4903-8e6a-2d755e6c5f31/thumbs/208_Petir_Rd_Pic5.jpg?1535124231',
+  'https://s3-ap-southeast-1.amazonaws.com/homebyhitcheed-staging/images/67a9c73e-df03-490c-be4e-78d19eddf30e/thumbs/0932_10pm_1.jpg?1535125885',
+  'https://s3-ap-southeast-1.amazonaws.com/homebyhitcheed-staging/images/8877be15-7226-4d67-8f32-3118720d0f01/thumbs/DSC_0111_%28Medium%29.jpg?1535159785',
+  'https://s3-ap-southeast-1.amazonaws.com/homebyhitcheed-staging/images/6135d8bf-d5a6-4cb3-bd22-33ed4a8f2784/thumbs/IMG_0315.jpg?1535162673',
+  'https://s3-ap-southeast-1.amazonaws.com/homebyhitcheed-staging/images/09308387-db49-4a40-b46b-599ddf60e380/thumbs/0932_TT_5.jpg?1535163983',
+  'https://www.renonation.sg/wp-content/uploads/Absolook-181b-boon-lay-meadow-5.jpg',
+  'https://www.renonation.sg/wp-content/uploads/corazon-visioncrest-01.jpg'];
+  HDBDetail(this.houses, this.i);
   Color mainColor = const Color(0xff3C3261);
+
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       body: new Stack(fit: StackFit.expand, children: [
         new Image.network(
-          image_url,
+          image_url[i%10],
           fit: BoxFit.cover,
         ),
         new BackdropFilter(
@@ -37,7 +52,7 @@ class HDBDetail extends StatelessWidget {
                       borderRadius: new BorderRadius.circular(10.0),
                       image: new DecorationImage(
                           image: new NetworkImage(
-                              image_url),
+                              image_url[i%10]),
                           fit: BoxFit.cover),
                       boxShadow: [
                         new BoxShadow(
@@ -53,29 +68,53 @@ class HDBDetail extends StatelessWidget {
                     children: <Widget>[
                       new Expanded(
                           child: new Text(
-                            houses["block"]+', '+houses["street_name"],
-                            style: GoogleFonts.montserrat(
-                                textStyle: TextStyle(
-                                    color: Colors.white, fontSize: 30))
+                              houses["block"]+', '+houses["street_name"],
+                              style: GoogleFonts.montserrat(
+                                  textStyle: TextStyle(
+                                      color: Colors.white, fontSize: 30))
                           )),
-                      new Text(
+
+                        new Text(
                         '\$'+'${houses["resale_price"]}',
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                                 color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
-                      )
+
+                        )
                     ],
                   ),
                 ),
                 new Row(
+                  //mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                  new Icon(Icons.home, color: Colors.white, size: 20) ,
-                new Text('\n'+'   Neighbourhood: '+ houses["town"] + '\n' ,
-                    style: GoogleFonts.montserrat(
-                        textStyle: TextStyle(
-                            color: Colors.white, fontSize: 18))
-                )
-                  ]),
+
+
+                    new Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: new Container(
+                          padding: const EdgeInsets.all(16.0),
+                          alignment: Alignment.center,
+                          child: new Icon(
+                            Icons.bookmark,
+                            color: Colors.white,
+                          ),
+                          decoration: new BoxDecoration(
+                              borderRadius: new BorderRadius.circular(10.0),
+                              color: const Color(0xaa3C3261)),
+                        )
+                    ),
+
+                  ],
+                ),
+                new Row(
+                    children: <Widget>[
+                      new Icon(Icons.home, color: Colors.white, size: 20) ,
+                      new Text('\n'+'   Neighbourhood: '+ houses["town"] + '\n' ,
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Colors.white, fontSize: 18))
+                      )
+                    ]),
                 new Row(
                     children: <Widget>[
                       new Icon(Icons.home, color: Colors.white, size: 20) ,
@@ -140,54 +179,6 @@ class HDBDetail extends StatelessWidget {
                       )
                     ]),
 
-                new Row(
-                  children: <Widget>[
-                    new Expanded(
-                        child: new Container(
-                          width: 150.0,
-                          height: 60.0,
-                          alignment: Alignment.center,
-                          child: new Text(
-                            'Rate Unit',
-                            style: new TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Arvo',
-                                fontSize: 20.0),
-                          ),
-                          decoration: new BoxDecoration(
-                              borderRadius: new BorderRadius.circular(10.0),
-                              color: const Color(0xaa3C3261)),
-                        )),
-                    new Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: new Container(
-                        padding: const EdgeInsets.all(16.0),
-                        alignment: Alignment.center,
-                        child: new Icon(
-                          Icons.share,
-                          color: Colors.white,
-                        ),
-                        decoration: new BoxDecoration(
-                            borderRadius: new BorderRadius.circular(10.0),
-                            color: const Color(0xaa3C3261)),
-                      ),
-                    ),
-                    new Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: new Container(
-                          padding: const EdgeInsets.all(16.0),
-                          alignment: Alignment.center,
-                          child: new Icon(
-                            Icons.bookmark,
-                            color: Colors.white,
-                          ),
-                          decoration: new BoxDecoration(
-                              borderRadius: new BorderRadius.circular(10.0),
-                              color: const Color(0xaa3C3261)),
-                        )
-                    ),
-                  ],
-                )
               ],
             ),
           ),
