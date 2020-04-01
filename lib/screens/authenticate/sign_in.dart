@@ -6,6 +6,7 @@ import 'package:hdbfinder/screens/authenticate/forgot_pw.dart';
 import 'package:hdbfinder/screens/home/home.dart';
 import 'package:hdbfinder/services/auth.dart';
 import 'package:hdbfinder/shared/loading.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -30,7 +31,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
-      backgroundColor: Color(0xff3a506b),
+      backgroundColor: Color(0xff6d326d),
       body: new Center(
         child: SingleChildScrollView(
             child: Column(
@@ -43,10 +44,9 @@ class _SignInState extends State<SignIn> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children:[
                           Text('HDBFinder',
-                            style: TextStyle(
-                                fontSize: 45.0,
-                                fontWeight: FontWeight.w700,
-                                color: Color(0xffe0e0e2)
+                            style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                                    color: Color(0xffe5f4e3), fontSize: 42.0, fontWeight: FontWeight.bold)
                             ),
                             textAlign: TextAlign.center,)
                         ]
@@ -80,13 +80,14 @@ class _SignInState extends State<SignIn> {
                                     Icons.email,
                                     color: Color(0xffe0e0e2)
                                 ),
-                                hintStyle: TextStyle(
-                                    color: Color(0xffe0e0e2)
-                                )
+                                hintStyle: GoogleFonts.montserrat(
+                                    textStyle: TextStyle(
+                                        color: Color(0xffe5f4e3), fontSize: 14.0, fontWeight: FontWeight.bold)
+                                ),
                             ),
-                            style: TextStyle(
-                              color: Color(0xffe0e0e2),
-                            ),
+                            style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                                    color: Color(0xffe5f4e3), fontSize: 14.0, fontWeight: FontWeight.bold)),
                             validator: (val) => val.isEmpty ? 'Enter your email' : null,
                             onChanged: (val) {
                               setState(() => email = val);
@@ -115,8 +116,9 @@ class _SignInState extends State<SignIn> {
                                   Icons.lock,
                                   color: Color(0xffe0e0e2)
                               ),
-                              hintStyle: TextStyle(
-                                  color: Color(0xffe0e0e2)
+                              hintStyle: GoogleFonts.montserrat(
+                                  textStyle: TextStyle(
+                                      color: Color(0xffe5f4e3), fontSize: 14.0, fontWeight: FontWeight.bold)
                               ),
                               suffixIcon: IconButton(
                                 icon: Icon(
@@ -134,8 +136,9 @@ class _SignInState extends State<SignIn> {
                                 },
                               ),
                             ),
-                            style: TextStyle(
-                              color: Color(0xffe0e0e2),
+                            style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                                    color: Color(0xffe5f4e3), fontSize: 14.0, fontWeight: FontWeight.bold)
                             ),
                             validator: (val) => val.length < 6 ? 'Password should be at least 6 characters' : null,
                             onChanged: (val) {
@@ -176,10 +179,9 @@ class _SignInState extends State<SignIn> {
                         },
                         child: Text(
                           'Login',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w700,
-                            color: Color(0xff3a506b),
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Color(0xff003f91), fontSize: 24.0, fontWeight: FontWeight.bold)
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -202,9 +204,9 @@ class _SignInState extends State<SignIn> {
                         },
                         child: Text(
                           'CREATE ACCOUNT',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Color(0xffe0e0e2),
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Color(0xffe5f4e3), fontSize: 18.0, fontWeight: FontWeight.bold),
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -225,9 +227,9 @@ class _SignInState extends State<SignIn> {
                         },
                         child: Text(
                           'FORGOT PASSWORD?',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Color(0xffe0e0e2),
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Color(0xffe5f4e3), fontSize: 18.0, fontWeight: FontWeight.bold),
                           ),
                           textAlign: TextAlign.center,
                         ),
