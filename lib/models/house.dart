@@ -55,7 +55,7 @@ class House{
       double dlat=lat2-lat1;
       double dlon=(lon2-lon1)*cos(lat1);
 
-      double distance=sqrt(dlat*dlat+dlon*dlon);
+      double distance=sqrt(dlat*dlat+dlon*dlon)*r;
       if(distance<minDistance){
         minDistance=distance;
         station=stations[i][0];
