@@ -41,7 +41,55 @@ class DatabaseService {
     idList = snapshot.data['savedListings'];
     });
     return idList;
-}
+  }
 
+  Future<List> getSavedListings() async {
+    List listings = [];
+    int count;
+    var idList = await getListingIds();
 
+    await userCollection.document('$uid')
+        .get()
+        .then((DocumentSnapshot snapshot) {
+      count = snapshot.data['listingsCount'];
+    });
+
+    for(int i = 0; i < count; i++) {
+      int j = idList[i];
+      await userCollection.document('$uid')
+          .get()
+          .then((DocumentSnapshot snapshot) {
+        listings.add(snapshot.data['listing$j']);
+      });
+    }
+    return listings;
+  }
+
+  Future<void> deleteSavedListing(int listingId) async {
+    var idList;
+    int count;
+
+    await userCollection.document('$uid')
+        .get()
+        .then((DocumentSnapshot snapshot) {
+      idList = snapshot.data['savedListings'];
+    });
+
+    await userCollection.document('$uid')
+        .get()
+        .then((DocumentSnapshot snapshot) {
+      count = snapshot.data['listingsCount'];
+    });
+
+    idList.remove(listingId);
+    count--;
+
+    try {
+      await userCollection.document('$uid').updateData({'listingsCount': count});
+      await userCollection.document('$uid').updateData({'listing$listingId': FieldValue.delete()});
+      await userCollection.document('$uid').updateData({'savedListings': idList});
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 }
