@@ -7,8 +7,41 @@ class DatabaseService {
 
   final CollectionReference userCollection = Firestore.instance.collection('users');
 
-  Future updateUserData(String listingId) async {
-    return await userCollection.document(uid).collection('listings').document('listingId');
+  void updateSavedListings(var listingDetails) async {
+
+    int count;
+    var idList;
+    await userCollection.document('$uid')
+        .get()
+        .then((DocumentSnapshot snapshot) {
+      count = snapshot.data['listingsCount'];
+    });
+    await userCollection.document('$uid')
+        .get()
+        .then((DocumentSnapshot snapshot) {
+      idList = snapshot.data['savedListings'];
+    });
+    count++;
+    int id = listingDetails['_id'];
+    idList.add(id);
+    try {
+      await userCollection.document('$uid').updateData({'listingsCount': count});
+      await userCollection.document('$uid').updateData({'listing$id': listingDetails});
+      await userCollection.document('$uid').updateData({'savedListings': idList});
+    } catch (e) {
+      print(e.toString());
+    }
   }
+
+  Future<List> getListingIds() async {
+    var idList;
+    await userCollection.document('$uid')
+        .get()
+        .then((DocumentSnapshot snapshot) {
+    idList = snapshot.data['savedListings'];
+    });
+    return idList;
+}
+
 
 }

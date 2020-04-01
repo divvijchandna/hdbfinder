@@ -41,8 +41,9 @@ class AuthService {
       UserUpdateInfo userUpdateInfo = new UserUpdateInfo();
       userUpdateInfo.displayName = name;
       user.updateProfile(userUpdateInfo);
-      Firestore.instance.collection('users').document().setData(
-          {'email': email, 'displayName': name});
+      String uid = user.uid;
+      Firestore.instance.collection('users').document('$uid').setData(
+          {'email': email, 'displayName': name, 'listingsCount': 0, 'savedListings': []});
       return _userFromFirebaseUser(user);
     } catch(e) {
       print(e.toString());

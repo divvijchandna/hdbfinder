@@ -609,7 +609,7 @@ class _SearchFiltersState extends State<SearchFilters> {
               ),
             ),
             Padding(
-                padding: const EdgeInsets.fromLTRB(132.5, 20.0, 132.5, 20.0),
+                padding: const EdgeInsets.fromLTRB(125.0, 20.0, 125.0, 20.0),
                 child: Container(
                   alignment: Alignment.center,
                   width: 160.0,

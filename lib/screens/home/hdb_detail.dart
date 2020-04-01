@@ -22,6 +22,7 @@ class HDBDetail extends StatefulWidget {
 class _HDBDetailState extends State<HDBDetail> {
 
   var icon = Icon(Icons.bookmark_border, color: Colors.white);
+  bool saved = false;
   var image_url = ['https://s3-ap-southeast-1.amazonaws.com/homebyhitcheed-staging/images/da97d034-a526-4cee-b401-8627f40a2aab/thumbs/SSR_4169.JPG?1535097721',
   'https://s3-ap-southeast-1.amazonaws.com/homebyhitcheed-staging/images/29d3f480-cb12-41f7-94c6-7a859c68114a/thumbs/L_DSC2611.jpg?1535099398',
   'https://s3-ap-southeast-1.amazonaws.com/homebyhitcheed-staging/images/107118d2-aa80-4f27-a66e-1cf3d965d84e/thumbs/IMG_8959.jpg?1535122973',
@@ -33,12 +34,12 @@ class _HDBDetailState extends State<HDBDetail> {
   'https://www.renonation.sg/wp-content/uploads/Absolook-181b-boon-lay-meadow-5.jpg',
   'https://www.renonation.sg/wp-content/uploads/corazon-visioncrest-01.jpg'];
 
-//  "https://hdb-finder-297c0.firebaseio.com"
 
   Color mainColor = const Color(0xff3C3261);
 
   @override
   Widget build(BuildContext context) {
+    setFlag();
     return new Scaffold(
       body: new Stack(fit: StackFit.expand, children: [
         new Image.network(
@@ -110,9 +111,14 @@ class _HDBDetailState extends State<HDBDetail> {
                           alignment: Alignment.center,
                           child: IconButton(
                             icon: icon,
-                            onPressed: () {
-                              icon = Icon(Icons.bookmark, color: Colors.white);
-                              DatabaseService();
+                            onPressed: () async {
+                              if(saved == false) {
+                                setState(() {
+                                  icon = Icon(Icons.bookmark, color: Colors.white);
+                                });
+                                var uid = await getUid();
+                                DatabaseService(uid: uid).updateSavedListings(widget.houses);
+                              }
                             },
                           ),
                           decoration: new BoxDecoration(
@@ -232,5 +238,25 @@ class _HDBDetailState extends State<HDBDetail> {
         )
       ]),
     );
+  }
+
+  Future<String> getUid() async {
+    final FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    final String uid = user.uid.toString();
+    return uid;
+  }
+
+  void setFlag() async {
+    String uid = await getUid();
+    List idList = await DatabaseService(uid: uid).getListingIds();
+    if(idList.contains(widget.houses['_id'])) {
+      saved = true;
+      setState(() {
+        icon = Icon(Icons.bookmark, color: Colors.white);
+      });
+    }
+    else {
+      saved = false;
+    }
   }
 }

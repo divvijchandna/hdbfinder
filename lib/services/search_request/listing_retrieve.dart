@@ -53,8 +53,8 @@ class SearchListings{
 
     int k=0;
 
-    for(int i=filters.filterRange.minArea;i<=filters.filterRange.maxArea;i++){
-      for(int j=filters.filterRange.minPrice;j<filters.filterRange.maxPrice;j=j+1000){
+    for(int i=filters.filterRange.minArea;i<=filters.filterRange.maxArea;i=i+2){
+      for(int j=filters.filterRange.minPrice;j<filters.filterRange.maxPrice;j=j+5000){
         String query='';
         if(filters.filterByType==1){
           query=query+',"flat_type":"'+filters.filterRange.type+'"';
