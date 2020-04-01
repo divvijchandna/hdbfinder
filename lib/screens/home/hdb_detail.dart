@@ -179,7 +179,7 @@ class HDBDetail extends StatelessWidget {
                                   color: Colors.white, fontSize: 18))
                       )
                     ]),
-                Center(
+               /* Center(
                     child: Container(
                         child: SfCartesianChart(
                             title: ChartTitle(text: 'Half yearly sales analysis'),
@@ -204,7 +204,7 @@ class HDBDetail extends StatelessWidget {
                             ]
                         )
                     )
-                )
+                )*/
 
 
 
