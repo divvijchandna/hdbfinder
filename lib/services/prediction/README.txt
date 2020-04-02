@@ -6,7 +6,7 @@ void main() async{
 
   var input=processInput(1,1999,'bedok','2-room','01 TO 03','80','improved');
   int predict=score(input);
-  double price=processOutput(predict);
+  double price=processOutput(predict, 1999);
 
   print(price);
 
