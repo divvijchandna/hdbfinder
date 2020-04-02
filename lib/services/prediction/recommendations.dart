@@ -61,6 +61,7 @@ class Recommendations{
       recommend.setType(flatType);
       await recommend.getListingsByFilter();
       jsonRecommendations=recommend.listing.jsonBody;
+      jsonRecommendations['result']['records'][0];
 
     }catch(Exception){
       await recommend.getListingsByKeyword('');
