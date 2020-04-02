@@ -46,15 +46,15 @@ class SearchListings{
   }
 
   Future<void> getListingsByFilter() async{
-    int pricerange=((filters.filterRange.maxPrice-filters.filterRange.minPrice)/1000).round();
-    int arearange=filters.filterRange.maxArea-filters.filterRange.minArea+1;
+    int pricerange=((filters.filterRange.maxPrice-filters.filterRange.minPrice)/10000).round();
+    int arearange=((filters.filterRange.maxArea-filters.filterRange.minArea+1)/2).round();
 
     List<String> queries=List(arearange*pricerange);
 
     int k=0;
 
     for(int i=filters.filterRange.minArea;i<=filters.filterRange.maxArea;i=i+2){
-      for(int j=filters.filterRange.minPrice;j<filters.filterRange.maxPrice;j=j+5000){
+      for(int j=filters.filterRange.minPrice;j<filters.filterRange.maxPrice;j=j+10000){
         String query='';
         if(filters.filterByType==1){
           query=query+',"flat_type":"'+filters.filterRange.type+'"';
@@ -81,16 +81,19 @@ class SearchListings{
 
     await listing.fetch(queries[0]);
 
+    //print(queries.length);
+
     for(int i=1;i<queries.length;i++){
+      //print(i);
       await tempListing.fetch(queries[i]);
 
-      print(queries[i]);
-      print(tempListing.jsonBody['result']['records']);
+      //print(queries[i]);
+      //print(tempListing.jsonBody['result']['records']);
 
       listing.jsonBody['result']['records'].addAll(tempListing.jsonBody['result']['records']);
     }
 
-    print(listing.jsonBody['result']['records']);
+    //print(listing.jsonBody['result']['records']);
   }
 
   Future<void> getListingsByFilterdeprecate() async{
@@ -122,7 +125,7 @@ class SearchListings{
     request=request+sortBy;
 
     print(request);
-    print(request.length);
+    //print(request.length);
 
     await listing.fetch(request);
 
@@ -130,8 +133,10 @@ class SearchListings{
   }
 
   Future<void> getListingsByKeyword(String keyword) async{
-    request=request+'&q='+keyword;
     request=request+retrieveNumber;
+    request=request+'&q='+keyword;
+
+    print(request);
 
     await listing.fetch(request);
   }
