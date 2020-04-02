@@ -2,6 +2,7 @@ import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:hdbfinder/screens/home/home.dart';
 import 'package:hdbfinder/services/auth.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ForgotPassword extends StatefulWidget {
   @override
@@ -18,7 +19,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff3a506b),
+      backgroundColor: Color(0xff003f91),
       body: new Center(
         child: SingleChildScrollView(
           child: Column(
@@ -31,10 +32,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children:[
                         Text('HDBFinder',
-                          style: TextStyle(
-                              fontSize: 45.0,
-                              fontWeight: FontWeight.w700,
-                              color: Color(0xffe0e0e2)
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Color(0xffe5f4e3), fontSize: 45.0, fontWeight: FontWeight.bold)
                           ),
                           textAlign: TextAlign.center,)
                       ]
@@ -44,10 +44,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
                   child: Text(
                     'Forgot Password?',
-                    style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xffe0e0e2)
+                    style: GoogleFonts.montserrat(
+                        textStyle: TextStyle(
+                            color: Color(0xffe5f4e3), fontSize: 20.0, fontWeight: FontWeight.w500)
                     ),
                     textAlign: TextAlign.center,
                   )
@@ -81,12 +80,14 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                   Icons.email,
                                   color: Color(0xffe0e0e2)
                               ),
-                              hintStyle: TextStyle(
-                                  color: Color(0xffe0e0e2)
-                              )
+                              hintStyle: GoogleFonts.montserrat(
+                                  textStyle: TextStyle(
+                                      color: Color(0xffe5f4e3))
+                              ),
                           ),
-                          style: TextStyle(
-                            color: Color(0xffe0e0e2),
+                          style:GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Color(0xffe5f4e3))
                           ),
                           validator: (val) => val.isEmpty ? 'Enter your email' : null,
                           onChanged: (val) {
@@ -125,10 +126,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       },
                       child: Text(
                         'Send Password Reset Link',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w700,
-                          color: Color(0xff3a506b),
+                        style: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                                color: Color(0xff6d326d), fontSize: 20.0, fontWeight: FontWeight.bold)
                         ),
                         textAlign: TextAlign.center,
                       ),

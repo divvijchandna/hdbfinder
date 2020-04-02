@@ -13,7 +13,25 @@ class HDBDetail extends StatefulWidget {
   final houses;
   final i;
 
-  HDBDetail(this.houses, this.i);
+  final List <double> resales = new List(12);
+
+  HDBDetail(this.houses, this.i){
+    var count=0;
+    for (int i = 2020; i < 2031; i++) {
+      var input = processInput(
+          1,
+          i,
+          houses['town'],
+          houses['flat_type'],
+          houses['storey_range'],
+          houses['floor_area_sqm'],
+          houses['flat_model']
+      );
+      int predict = score(input);
+      resales[count] = processOutput(predict);
+      count++;
+    }
+  }
 
   @override
   _HDBDetailState createState() => _HDBDetailState();
@@ -43,7 +61,7 @@ class _HDBDetailState extends State<HDBDetail> {
     return new Scaffold(
       body: new Stack(fit: StackFit.expand, children: [
         new Image.network(
-          image_url[widget.i%10],
+          image_url[widget.i % 10],
           fit: BoxFit.cover,
         ),
         new BackdropFilter(
@@ -67,7 +85,7 @@ class _HDBDetailState extends State<HDBDetail> {
                       borderRadius: new BorderRadius.circular(10.0),
                       image: new DecorationImage(
                           image: new NetworkImage(
-                              image_url[widget.i%10]),
+                              image_url[widget.i % 10]),
                           fit: BoxFit.cover),
                       boxShadow: [
                         new BoxShadow(
@@ -83,19 +101,22 @@ class _HDBDetailState extends State<HDBDetail> {
                     children: <Widget>[
                       new Expanded(
                           child: new Text(
-                              widget.houses["block"]+', '+widget.houses["street_name"],
+                              widget.houses["block"] + ', ' + widget
+                                  .houses["street_name"],
                               style: GoogleFonts.montserrat(
                                   textStyle: TextStyle(
                                       color: Colors.white, fontSize: 30))
                           )),
 
-                        new Text(
-                        '\$'+'${widget.houses["resale_price"]}',
+                      new Text(
+                        '\$' + '${widget.houses["resale_price"]}',
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
-                                color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+                                color: Colors.white,
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold)),
 
-                        )
+                      )
                     ],
                   ),
                 ),
@@ -112,12 +133,14 @@ class _HDBDetailState extends State<HDBDetail> {
                           child: IconButton(
                             icon: icon,
                             onPressed: () async {
-                              if(saved == false) {
+                              if (saved == false) {
                                 setState(() {
-                                  icon = Icon(Icons.bookmark, color: Colors.white);
+                                  icon =
+                                      Icon(Icons.bookmark, color: Colors.white);
                                 });
                                 var uid = await getUid();
-                                DatabaseService(uid: uid).updateSavedListings(widget.houses);
+                                DatabaseService(uid: uid).updateSavedListings(
+                                    widget.houses);
                               }
                             },
                           ),
@@ -131,8 +154,10 @@ class _HDBDetailState extends State<HDBDetail> {
                 ),
                 new Row(
                     children: <Widget>[
-                      new Icon(Icons.home, color: Colors.white, size: 20) ,
-                      new Text('\n'+'   Neighbourhood: '+ widget.houses["town"] + '\n' ,
+                      new Icon(Icons.home, color: Colors.white, size: 20),
+                      new Text(
+                          '\n' + '   Neighbourhood: ' + widget.houses["town"] +
+                              '\n',
                           style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
                                   color: Colors.white, fontSize: 18))
@@ -140,8 +165,10 @@ class _HDBDetailState extends State<HDBDetail> {
                     ]),
                 new Row(
                     children: <Widget>[
-                      new Icon(Icons.home, color: Colors.white, size: 20) ,
-                      new Text('\n'+'   Flat Type: ' + widget.houses["flat_type"] +'\n' ,
+                      new Icon(Icons.home, color: Colors.white, size: 20),
+                      new Text(
+                          '\n' + '   Flat Type: ' + widget.houses["flat_type"] +
+                              '\n',
                           style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
                                   color: Colors.white, fontSize: 18))
@@ -149,8 +176,11 @@ class _HDBDetailState extends State<HDBDetail> {
                     ]),
                 new Row(
                     children: <Widget>[
-                      new Icon(Icons.star_border, color: Colors.white, size: 20) ,
-                      new Text('\n'+'   Model: ' + widget.houses["flat_model"] +'\n'  ,
+                      new Icon(
+                          Icons.star_border, color: Colors.white, size: 20),
+                      new Text(
+                          '\n' + '   Model: ' + widget.houses["flat_model"] +
+                              '\n',
                           style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
                                   color: Colors.white, fontSize: 18))
@@ -158,8 +188,10 @@ class _HDBDetailState extends State<HDBDetail> {
                     ]),
                 new Row(
                     children: <Widget>[
-                      new Icon(Icons.crop_square, color: Colors.white, size: 20) ,
-                      new Text('\n'+'   Area (sqm): ' + widget.houses["floor_area_sqm"] +'\n' ,
+                      new Icon(
+                          Icons.crop_square, color: Colors.white, size: 20),
+                      new Text('\n' + '   Area (sqm): ' +
+                          widget.houses["floor_area_sqm"] + '\n',
                           style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
                                   color: Colors.white, fontSize: 18))
@@ -167,8 +199,10 @@ class _HDBDetailState extends State<HDBDetail> {
                     ]),
                 new Row(
                     children: <Widget>[
-                      new Icon(Icons.calendar_today, color: Colors.white, size: 20) ,
-                      new Text('\n'+'   Date: ' + widget.houses["month"] +'\n'  ,
+                      new Icon(
+                          Icons.calendar_today, color: Colors.white, size: 20),
+                      new Text(
+                          '\n' + '   Date: ' + widget.houses["month"] + '\n',
                           style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
                                   color: Colors.white, fontSize: 18))
@@ -176,8 +210,10 @@ class _HDBDetailState extends State<HDBDetail> {
                     ]),
                 new Row(
                     children: <Widget>[
-                      new Icon(Icons.calendar_today, color: Colors.white, size: 20) ,
-                      new Text('\n'+'   Lease Commencement: ' + widget.houses["lease_commence_date"] +'\n'  ,
+                      new Icon(
+                          Icons.calendar_today, color: Colors.white, size: 20),
+                      new Text('\n' + '   Lease Commencement: ' +
+                          widget.houses["lease_commence_date"] + '\n',
                           style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
                                   color: Colors.white, fontSize: 18))
@@ -185,51 +221,70 @@ class _HDBDetailState extends State<HDBDetail> {
                     ]),
                 new Row(
                     children: <Widget>[
-                      new Icon(Icons.calendar_today, color: Colors.white, size: 20) ,
+                      new Icon(
+                          Icons.calendar_today, color: Colors.white, size: 20),
                       new Expanded(
-                      child: new Text('\n'+'   Remaining Lease: ' + '\n   ' + widget.houses["remaining_lease"] +'\n' ,
-                          style: GoogleFonts.montserrat(
-                              textStyle: TextStyle(
-                                  color: Colors.white, fontSize: 18))
-                      ))
+                          child: new Text(
+                              '\n' + '   Remaining Lease: ' + '\n   ' +
+                                  widget.houses["remaining_lease"] + '\n',
+                              style: GoogleFonts.montserrat(
+                                  textStyle: TextStyle(
+                                      color: Colors.white, fontSize: 18))
+                          ))
                     ]),
                 new Row(
                     children: <Widget>[
-                      new Icon(Icons.location_city, color: Colors.white, size: 20) ,
-                      new Text('\n'+'   Storey: ' + widget.houses["storey_range"] +'\n' ,
+                      new Icon(
+                          Icons.location_city, color: Colors.white, size: 20),
+                      new Text(
+                          '\n' + '   Storey: ' + widget.houses["storey_range"] +
+                              '\n',
                           style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
                                   color: Colors.white, fontSize: 18))
                       )
                     ]),
 
-               /* Center(
+                Center(
                     child: Container(
                         child: SfCartesianChart(
-                            title: ChartTitle(text: 'Half yearly sales analysis'),
+                            title: ChartTitle(text: 'Yearly resale analysis'),
                             // Initialize category axis
                             primaryXAxis: CategoryAxis(),
                             series: <ChartSeries>[
                               // Initialize line series
                               LineSeries<ResaleData, String>(
-                                  dataSource: [
+                                  dataSource:
+
+                                  [
                                     // Bind data source
-                                    ResaleData('Jan', 35),
-                                    ResaleData('Feb', 28),
-                                    ResaleData('Mar', 34),
-                                    ResaleData('Apr', 32),
-                                    ResaleData('May', 40)
-                                  ],
-                                  xValueMapper: (SalesData sales, _) => sales.year,
-                                  yValueMapper: (SalesData sales, _) => sales.sales,
+                                    ResaleData('Jan', widget.resales[0]),
+                                    ResaleData('Feb', widget.resales[1]),
+                                    ResaleData('Mar', widget.resales[2]),
+                                    ResaleData('Apr', widget.resales[3]),
+                                    ResaleData('May', widget.resales[4]),
+                                    ResaleData('Jun', widget.resales[5]),
+                                    ResaleData('Jul', widget.resales[6]),
+                                    ResaleData('Aug', widget.resales[7]),
+                                    ResaleData('Sep', widget.resales[8]),
+                                    ResaleData('Oct', widget.resales[9]),
+                                    ResaleData('Nov', widget.resales[10]),
+                                    ResaleData('Dec', widget.resales[11])
+                                  ]
+
+                                  ,
+                                  xValueMapper: (ResaleData resaleData,
+                                      _) => resaleData.month,
+                                  yValueMapper: (ResaleData resaleData,
+                                      _) => resaleData.resale,
                                   // Render the data label
-                                  dataLabelSettings:DataLabelSettings(isVisible : true)
+                                  dataLabelSettings: DataLabelSettings(
+                                      isVisible: true)
                               )
                             ]
                         )
                     )
-                )*/
-
+                )
 
 
               ],
@@ -260,3 +315,15 @@ class _HDBDetailState extends State<HDBDetail> {
     }
   }
 }
+
+
+
+
+class ResaleData
+{
+  ResaleData(this.month, this.resale);
+  final String month;
+  final double resale;
+}
+
+
