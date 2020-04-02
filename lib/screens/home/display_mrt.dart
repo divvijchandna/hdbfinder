@@ -72,8 +72,7 @@ Future<String> getMRTName(String address) async{
 
 
 Future<Map> getJson(String request) async {
-  //var apiKey = getApiKey();
-  //var url = 'http://api.themoviedb.org/3/discover/movie?api_key=${apiKey}';
+
   var response = await http.get(
       Uri.encodeFull(request),
       headers: {

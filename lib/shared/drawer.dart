@@ -6,6 +6,7 @@ import 'package:hdbfinder/screens/home/saved_searches.dart';
 import 'package:hdbfinder/services/auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hdbfinder/screens/home/display_mrt.dart';
+import 'package:hdbfinder/screens/home/map_view.dart';
 
 
 class MenuDrawer extends StatefulWidget {
@@ -38,7 +39,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
             onTap: () {
               Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Mrt())
+                  MaterialPageRoute(builder: (context) => MyMap())
               );
             },
           ),
