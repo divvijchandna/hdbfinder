@@ -288,11 +288,23 @@ class _HDBDetailState extends State<HDBDetail> {
                                   color: Colors.white, fontSize: 18))
                       )
                     ]),
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
 
+                      new Text(
+                          '\n'+'\n\n'+'Resale Price\n',
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Colors.white, fontSize: 22, fontWeight: FontWeight.w600))
+                      )
+
+                    ]),
                 Center(
                     child: Container(
-                        child: SfCartesianChart(
-                            title: ChartTitle(text: 'Yearly resale analysis'),
+                        color: Colors.white,                        child: SfCartesianChart(
+                            plotAreaBackgroundColor: Colors.white,
+
                             // Initialize category axis
                             primaryXAxis: CategoryAxis(),
                             series: <ChartSeries>[
@@ -322,8 +334,10 @@ class _HDBDetailState extends State<HDBDetail> {
                                   yValueMapper: (ResaleData resaleData,
                                       _) => resaleData.resale,
                                   // Render the data label
+
                                   dataLabelSettings: DataLabelSettings(
-                                      isVisible: true)
+                                      isVisible: true,
+                                      textStyle:ChartTextStyle(color: Colors.red))
                               )
                             ]
                         )
