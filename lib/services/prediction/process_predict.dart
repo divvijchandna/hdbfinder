@@ -1,4 +1,5 @@
 import 'price_predict.dart';
+import 'prediction_adjustment_values.dart';
 
 List processInput(int mm, int yyyy, String town, String flatType, String storeyRange,
     String floorArea, String flatModel){
@@ -46,7 +47,7 @@ List processInput(int mm, int yyyy, String town, String flatType, String storeyR
   return [mm/1,yyyy/1,storey,type,model,area,townid];
 }
 
-double processOutput(int value){
+double processOutput(int value, int predictionYear){
   double price=10000;
   for(int i=0;i<value;i++){
     if(price<500000){
@@ -55,5 +56,8 @@ double processOutput(int value){
       price=price+25000;
     }
   }
-  return price;
+  if(predictionYear<2019){
+    return price;
+  }
+  return price*(ind[predictionYear-2019]/ind[0]);
 }

@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-//import 'package:hdbfinder/screens/home/search_filters.dart';
+import 'package:hdbfinder/screens/home/search_filters.dart';
 import 'package:hdbfinder/screens/home/search_page.dart';
 import 'package:hdbfinder/shared/drawer.dart';
 import 'package:http/http.dart' as http;
@@ -9,7 +9,7 @@ import 'config.dart';
 import 'hdb_detail.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:math';
-import 'search_filters.dart';
+
 
 
 
@@ -43,12 +43,12 @@ class _HomeState extends State<Home> {
       drawer: MenuDrawer(),
       backgroundColor: Color(0xffe0e0e2),
       appBar: AppBar(
-        backgroundColor: Color(0xff17509b),
+        backgroundColor: Color(0xff3a506b),
         centerTitle: true,
         title: Text('Home',
           style: GoogleFonts.montserrat(
               textStyle: TextStyle(
-                  color: Color(0xffe0e0e2), fontSize: 32.0)
+                  color: Color(0xffe0e0e2), fontSize: 22.0, fontWeight: FontWeight.bold)
           ),
         ),
       ),
@@ -71,22 +71,22 @@ class _HomeState extends State<Home> {
                       autofocus: false,
                       decoration: InputDecoration(
                           enabledBorder: new OutlineInputBorder(
-                              borderSide: new BorderSide(color: Color(0xff17509b), width: 2.0)
+                              borderSide: new BorderSide(color: Color(0xff3a506b), width: 2.0)
                           ),
                           focusedBorder: new OutlineInputBorder(
-                              borderSide: new BorderSide(color: Color(0xff17509b), width: 2.0)
+                              borderSide: new BorderSide(color: Color(0xff3a506b), width: 2.0)
                           ),
                           hintText: 'Search by Keyword',
                           prefixIcon: new Icon(
                               Icons.search,
-                              color: Color(0xff559ad4)
+                              color: Color(0xff3a506b)
                           ),
                           hintStyle: TextStyle(
-                              color: Color(0xff559ad4)
+                              color: Color(0xff3a506b)
                           )
                       ),
                       style: TextStyle(
-                        color: Color(0xff559ad4),
+                        color: Color(0xff3a506b),
                       ),
                       onChanged: (val) {
                         setState(() => search = val);
@@ -119,11 +119,11 @@ class _HomeState extends State<Home> {
 
                           style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
-                                  color: Color(0xffe5f4e3), fontSize: 18.0, fontWeight: FontWeight.normal)
+                                  color: Color(0xffe0e0e2), fontSize: 18.0, fontWeight: FontWeight.w700)
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        color: Color(0xff17509b),
+                        color: Color(0xff3a506b),
                       ),
                     )
                 ),
@@ -145,11 +145,11 @@ class _HomeState extends State<Home> {
                           'Search with Filters',
                           style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
-                                  color: Color(0xffe5f4e3), fontSize: 17.0, fontWeight: FontWeight.normal)
-                          ),
+                                    color: Color(0xffe0e0e2), fontSize: 17.0, fontWeight: FontWeight.w700)
+                            ),
                           textAlign: TextAlign.center,
                         ),
-                        color: Color(0xff17509b),
+                        color: Color(0xff3a506b),
                       ),
                     )
                 ),
@@ -166,7 +166,7 @@ class _HomeState extends State<Home> {
                       onPressed: () {
                         Navigator.push(context,
                             new MaterialPageRoute(builder: (context) {
-                              return new HDBDetail(houses[i], i); //pass i later if you want
+                              return new HDBDetail(houses[i]);
                             }));
                       },
                       color: Colors.white,
@@ -206,7 +206,7 @@ class HDBTitle extends StatelessWidget {
         'Featured',
         style: GoogleFonts.montserrat(
             textStyle: TextStyle(
-                color: Color(0xff6d326d), fontSize: 32.0)
+                color: Color(0xff7389ae), fontSize: 32.0)
         ),
       ),
     );
@@ -279,58 +279,58 @@ class HDBCell extends StatelessWidget {
                         houses[i]['town'] + " Block " + houses[i]['block'],
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
-                                color: Color(0xff17509b), fontSize: 18.0)
+                                color: Color(0xff3A506B), fontSize: 18.0)
                         ),
                       ),
                       new Padding(padding: const EdgeInsets.all(2.0)),
                       new Row(
-                        children: [
+                      children: [
 
-                          Padding(
-                            padding: EdgeInsets.all(4.0),
-                            child: Icon(
-                              Icons.home,
-                              color: Color(0xff875787),
-                              size: 18.0,
-                            ),
+                        Padding(
+                          padding: EdgeInsets.all(4.0),
+                          child: Icon(
+                            Icons.home,
+                            color: Color(0xff7389ae),
+                            size: 18.0,
                           ),
+                        ),
 
-                          Padding(
-                            padding: EdgeInsets.all(4.0),
-                            child: new Text(
-                              houses[i]['flat_type'],
-                              maxLines: 3,
+                        Padding(
+                          padding: EdgeInsets.all(4.0),
+                          child: new Text(
+                            houses[i]['flat_type'],
+                            maxLines: 3,
+                            style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                                    color: Color(0xff7389ae), fontSize: 14.0)
+                            ),
+                        ),
+                      ),
+                        Spacer(),
+
+                        Padding(
+                          padding: EdgeInsets.all(0.0),
+                          child: Icon(
+                            Icons.attach_money,
+                            color: Color(0xff7389ae),
+                            size: 18.0,
+                          ),
+                        ),
+
+                        Padding(
+                          padding: EdgeInsets.all(0.0),
+                          child: new Text(
+                            houses[i]['resale_price'],
                               style: GoogleFonts.montserrat(
                                   textStyle: TextStyle(
-                                      color: Color(0xff875787), fontSize: 14.0)
+                                      color: Color(0xff7389ae), fontSize: 14.0)
+
                               ),
-                            ),
-                          ),
-                          Spacer(),
 
-                          Padding(
-                            padding: EdgeInsets.all(0.0),
-                            child: Icon(
-                              Icons.attach_money,
-                              color: Color(0xff875787),
-                              size: 18.0,
-                            ),
-                          ),
-
-                          Padding(
-                              padding: EdgeInsets.all(0.0),
-                              child: new Text(
-                                houses[i]['resale_price'],
-                                style: GoogleFonts.montserrat(
-                                    textStyle: TextStyle(
-                                        color: Color(0xff875787), fontSize: 14.0)
-
-                                ),
-
-                              )
                           )
-                        ],
-                      )
+                        )
+                          ],
+                          )
                     ],
                     crossAxisAlignment: CrossAxisAlignment.start,
                   ),
