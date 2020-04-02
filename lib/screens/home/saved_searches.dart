@@ -6,6 +6,7 @@ import 'package:hdbfinder/screens/home/hdb_settings.dart';
 import 'package:hdbfinder/services/database.dart';
 import 'package:hdbfinder/shared/drawer.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hdbfinder/shared/loading.dart';
 
 class SavedSearches extends StatefulWidget {
   @override
@@ -16,6 +17,7 @@ class _SavedSearchesState extends State<SavedSearches> {
 
   var houses;
   Color mainColor = const Color(0xff6d326d);
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,9 @@ class _SavedSearchesState extends State<SavedSearches> {
                         Navigator.push(context,
                             new MaterialPageRoute(builder: (context) {
                               return new HDBDetail(houses[i], i); //pass i later if you want
-                            }));
+                            }
+                            )
+                        );
                       },
                       color: Colors.white,
                     );
@@ -67,10 +71,14 @@ class _SavedSearchesState extends State<SavedSearches> {
   }
 
   void setHouses() async {
+    setState(() {
+      loading = true;
+    });
     String uid = await getUid();
     var l = await DatabaseService(uid: uid).getSavedListings();
     setState(() {
       houses = l;
+      loading = false;
     });
   }
 }
@@ -98,13 +106,21 @@ class HDBTitle extends StatelessWidget {
 
 
 
-class HDBCell extends StatelessWidget {
+class HDBCell extends StatefulWidget {
 
   final houses;
   final i;
-  Color mainColor = const Color(0xff3C3261);
-  var image_url = 'https://picsum.photos/300?image=522';
+
   HDBCell(this.houses, this.i);
+
+  @override
+  _HDBCellState createState() => _HDBCellState();
+}
+
+class _HDBCellState extends State<HDBCell> {
+  Color mainColor = const Color(0xff3C3261);
+
+  var imageUrl = 'https://picsum.photos/300?image=522';
 
   final List<String> imageList = ["https://picsum.photos/300?image=522",
     "https://media.istockphoto.com/photos/public-housing-in-bishan-singapore-picture-id516264474?s=2048x2048",
@@ -117,9 +133,6 @@ class HDBCell extends StatelessWidget {
     "https://www.todayonline.com/sites/default/files/boontiong_pt_1_0.jpg",
     "https://media.homeanddecor.com.sg/public/2017/02/57693-06q8038.jpg"
   ];
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +154,7 @@ class HDBCell extends StatelessWidget {
                   color: Colors.grey,
                   image: new DecorationImage(
                       image: new NetworkImage(
-                          imageList[i% (imageList.length)]), // + houses[i]['poster_path']),
+                          imageList[widget.i% (imageList.length)]), // + houses[i]['poster_path']),
                       fit: BoxFit.cover),
                   boxShadow: [
                     new BoxShadow(
@@ -158,7 +171,7 @@ class HDBCell extends StatelessWidget {
                   child: new Column(
                     children: [
                       new Text(
-                        houses[i]['town'] + " Block " + houses[i]['block'],
+                        widget.houses[widget.i]['town'] + " Block " + widget.houses[widget.i]['block'],
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                                 color: Color(0xff17509b), fontSize: 18.0)
@@ -180,7 +193,7 @@ class HDBCell extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.all(4.0),
                             child: new Text(
-                              houses[i]['flat_type'],
+                              widget.houses[widget.i]['flat_type'],
                               maxLines: 3,
                               style: GoogleFonts.montserrat(
                                   textStyle: TextStyle(
@@ -202,7 +215,7 @@ class HDBCell extends StatelessWidget {
                           Padding(
                               padding: EdgeInsets.all(0.0),
                               child: new Text(
-                                houses[i]['resale_price'],
+                                widget.houses[widget.i]['resale_price'],
                                 style: GoogleFonts.montserrat(
                                     textStyle: TextStyle(
                                         color: Color(0xff875787), fontSize: 14.0)
@@ -215,7 +228,7 @@ class HDBCell extends StatelessWidget {
                               icon: Icon(Icons.delete, color: Colors.red,),
                               onPressed: () async {
                                 String uid = await getUid();
-                                await DatabaseService(uid: uid).deleteSavedListing(houses[i]['_id']);
+                                await DatabaseService(uid: uid).deleteSavedListing(widget.houses[widget.i]['_id']);
                               }
                           ),
                         ],

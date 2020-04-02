@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class DatabaseService {
 
@@ -88,6 +89,44 @@ class DatabaseService {
       await userCollection.document('$uid').updateData({'listingsCount': count});
       await userCollection.document('$uid').updateData({'listing$listingId': FieldValue.delete()});
       await userCollection.document('$uid').updateData({'savedListings': idList});
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future<String> getDisplayName() async {
+    String name;
+    await userCollection.document('$uid')
+        .get()
+        .then((DocumentSnapshot snapshot) {
+      name = snapshot.data['displayName'];
+    });
+    return name;
+  }
+
+  Future<String> getEmail() async {
+    String email;
+    await userCollection.document('$uid')
+        .get()
+        .then((DocumentSnapshot snapshot) {
+      email = snapshot.data['email'];
+    });
+    return email;
+  }
+
+  void updateDisplayName(String name) async {
+    try {
+      await userCollection.document('$uid').updateData({'displayName': name});
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  void updateEmail(String email) async {
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    try {
+      await userCollection.document('$uid').updateData({'email': email});
+      await user.updateEmail(email);
     } catch (e) {
       print(e.toString());
     }

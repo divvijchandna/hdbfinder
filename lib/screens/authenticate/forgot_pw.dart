@@ -111,7 +111,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           dynamic result = await _auth.resetPassword(email);
                           if(result != null) {
                             Flushbar(
-                              title: 'Password Reset',
+                              title: 'Password Reset Link',
                               message: 'Email Sent Successfully',
                               icon: Icon(
                                 Icons.email,
