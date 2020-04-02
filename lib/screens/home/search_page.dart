@@ -4,6 +4,7 @@ import 'package:hdbfinder/screens/home/search_filters.dart';
 import 'package:hdbfinder/services/search_request/listing_retrieve.dart';
 import 'package:hdbfinder/shared/drawer.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hdbfinder/shared/loading.dart';
 
 class SearchPage extends StatefulWidget {
   final String search;
@@ -25,13 +26,20 @@ class _SearchPageState extends State<SearchPage> {
 
   var houses;
   Color mainColor = const Color(0xff3a506b);
+  bool loading = false;
 
   void performSearch(String search, int priceMin, int priceMax, int areaMin, int areaMax, String typeValue, String modelValue, String townValue, String sortValue) async {
 
     var l = SearchListings();
     int flagTown = 0, flagModel = 0, flagType = 0;
     if(search != null) {
+      setState(() {
+        loading = true;
+      });
       await l.getListingsByKeyword(search);
+      setState(() {
+        loading = false;
+      });
     }
     else {
       if(typeValue != null)
@@ -50,8 +58,13 @@ class _SearchPageState extends State<SearchPage> {
       if(flagTown == 1)
         l.setTown(townValue);
       l.setSortBy(sortValue);
-
+      setState(() {
+        loading = true;
+      });
       await l.getListingsByFilter();
+      setState(() {
+        loading = false;
+      });
     }
 
     setState(() {
@@ -64,7 +77,7 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
       drawer: MenuDrawer(),
       backgroundColor: Color(0xffe0e0e2),
       appBar: AppBar(
@@ -199,7 +212,7 @@ class _SearchPageState extends State<SearchPage> {
                       color: Colors.white,
                     );
                   }),
-            )
+            ),
           ],
         ),
       ),
@@ -212,6 +225,7 @@ class _SearchPageState extends State<SearchPage> {
       performSearch(widget.search, widget.priceMin, widget.priceMax, widget.areaMin, widget.areaMax, widget.typeValue, widget.modelValue, widget.townValue, widget.sortValue);
     });
   }
+
 }
 
 class HDBTitle extends StatelessWidget {

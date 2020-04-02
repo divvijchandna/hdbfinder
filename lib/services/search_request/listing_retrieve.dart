@@ -46,15 +46,15 @@ class SearchListings{
   }
 
   Future<void> getListingsByFilter() async{
-    int pricerange=((filters.filterRange.maxPrice-filters.filterRange.minPrice)/1000).round();
-    int arearange=filters.filterRange.maxArea-filters.filterRange.minArea+1;
+    int priceRange=((filters.filterRange.maxPrice-filters.filterRange.minPrice)/10000).round();
+    int areaRange=filters.filterRange.maxArea-filters.filterRange.minArea+1;
 
-    List<String> queries=List(arearange*pricerange);
+    List<String> queries=List(areaRange*priceRange);
 
     int k=0;
 
-    for(int i=filters.filterRange.minArea;i<=filters.filterRange.maxArea;i=i+2){
-      for(int j=filters.filterRange.minPrice;j<filters.filterRange.maxPrice;j=j+5000){
+    for(int i=filters.filterRange.minArea;i<=filters.filterRange.maxArea;i=i+1){
+      for(int j=filters.filterRange.minPrice;j<filters.filterRange.maxPrice;j=j+10000){
         String query='';
         if(filters.filterByType==1){
           query=query+',"flat_type":"'+filters.filterRange.type+'"';
