@@ -7,25 +7,19 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:hdbfinder/services/prediction/price_predict.dart';
 import 'package:hdbfinder/services/prediction/process_predict.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:hdbfinder/services/search_request/pollution_retrieve.dart';
-import 'package:hdbfinder/models/house.dart';
-import 'package:hdbfinder/services/search_request/data_request.dart';
-import 'dart:async';
-
-
 
 
 class HDBDetail extends StatefulWidget {
   final houses;
   final i;
-  //var mrt_name;
+
   final List <double> resales = new List(12);
 
   HDBDetail(this.houses, this.i){
     var count=0;
-    for (int i = 2020; i < 2032; i++) {
+    for (int i = 2021; i < 2031; i++) {
       var input = processInput(
-          1,
+          6,
           i,
           houses['town'],
           houses['flat_type'],
@@ -37,10 +31,6 @@ class HDBDetail extends StatefulWidget {
       resales[count] = processOutput(predict, i);
       count++;
     }
-
-
-    //mrt = House.getNearestMRT(houses['street_name']);
-
   }
 
   @override
@@ -48,8 +38,6 @@ class HDBDetail extends StatefulWidget {
 }
 
 class _HDBDetailState extends State<HDBDetail> {
-
-  var mrt_name;
 
   var icon = Icon(Icons.bookmark_border, color: Colors.white);
   bool saved = false;
@@ -64,7 +52,6 @@ class _HDBDetailState extends State<HDBDetail> {
   'https://www.renonation.sg/wp-content/uploads/Absolook-181b-boon-lay-meadow-5.jpg',
   'https://www.renonation.sg/wp-content/uploads/corazon-visioncrest-01.jpg'];
 
-  bool _isButtonClicked = false;
 
   Color mainColor = const Color(0xff3C3261);
 
@@ -169,7 +156,7 @@ class _HDBDetailState extends State<HDBDetail> {
                     children: <Widget>[
                       new Icon(Icons.home, color: Colors.white, size: 20),
                       new Text(
-                          '\n' + '   Neighbourhood: ' + widget.houses["town"] + mrt_name +
+                          '\n' + '   Neighbourhood: ' + widget.houses["town"] +
                               '\n',
                           style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
@@ -271,23 +258,23 @@ class _HDBDetailState extends State<HDBDetail> {
 
                                   [
                                     // Bind data source
-                                    ResaleData('Jan', widget.resales[0]),
-                                    ResaleData('Feb', widget.resales[1]),
-                                    ResaleData('Mar', widget.resales[2]),
-                                    ResaleData('Apr', widget.resales[3]),
-                                    ResaleData('May', widget.resales[4]),
-                                    ResaleData('Jun', widget.resales[5]),
-                                    ResaleData('Jul', widget.resales[6]),
-                                    ResaleData('Aug', widget.resales[7]),
-                                    ResaleData('Sep', widget.resales[8]),
-                                    ResaleData('Oct', widget.resales[9]),
-                                    ResaleData('Nov', widget.resales[10]),
-                                    ResaleData('Dec', widget.resales[11])
+
+                                    ResaleData('2021', widget.resales[1]),
+                                    ResaleData('2022', widget.resales[2]),
+                                    ResaleData('2023', widget.resales[3]),
+                                    ResaleData('2024', widget.resales[4]),
+                                    ResaleData('2025', widget.resales[5]),
+                                    ResaleData('2026', widget.resales[6]),
+                                    ResaleData('2027', widget.resales[7]),
+                                    ResaleData('2028', widget.resales[8]),
+                                    ResaleData('2029', widget.resales[9]),
+                                    ResaleData('2030', widget.resales[10]),
+
                                   ]
 
                                   ,
                                   xValueMapper: (ResaleData resaleData,
-                                      _) => resaleData.month,
+                                      _) => resaleData.year,
                                   yValueMapper: (ResaleData resaleData,
                                       _) => resaleData.resale,
                                   // Render the data label
@@ -297,19 +284,16 @@ class _HDBDetailState extends State<HDBDetail> {
                             ]
                         )
                     )
-                ),
+                )
+
+
               ],
             ),
           ),
-
-
         )
       ]),
     );
   }
-
-
-
 
   Future<String> getUid() async {
     final FirebaseUser user = await FirebaseAuth.instance.currentUser();
@@ -335,12 +319,10 @@ class _HDBDetailState extends State<HDBDetail> {
 
 
 
-
-
 class ResaleData
 {
-  ResaleData(this.month, this.resale);
-  final String month;
+  ResaleData(this.year, this.resale);
+  final String year;
   final double resale;
 }
 
