@@ -7,17 +7,23 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:hdbfinder/services/prediction/price_predict.dart';
 import 'package:hdbfinder/services/prediction/process_predict.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hdbfinder/services/search_request/pollution_retrieve.dart';
+import 'package:hdbfinder/models/house.dart';
+import 'package:hdbfinder/services/search_request/data_request.dart';
+import 'dart:async';
+
+
 
 
 class HDBDetail extends StatefulWidget {
   final houses;
   final i;
-
+  //var mrt_name;
   final List <double> resales = new List(12);
 
   HDBDetail(this.houses, this.i){
     var count=0;
-    for (int i = 2020; i < 2031; i++) {
+    for (int i = 2020; i < 2032; i++) {
       var input = processInput(
           1,
           i,
@@ -28,9 +34,13 @@ class HDBDetail extends StatefulWidget {
           houses['flat_model']
       );
       int predict = score(input);
-      resales[count] = processOutput(predict);
+      resales[count] = processOutput(predict, i);
       count++;
     }
+
+
+    //mrt = House.getNearestMRT(houses['street_name']);
+
   }
 
   @override
@@ -38,6 +48,8 @@ class HDBDetail extends StatefulWidget {
 }
 
 class _HDBDetailState extends State<HDBDetail> {
+
+  var mrt_name;
 
   var icon = Icon(Icons.bookmark_border, color: Colors.white);
   bool saved = false;
@@ -52,6 +64,7 @@ class _HDBDetailState extends State<HDBDetail> {
   'https://www.renonation.sg/wp-content/uploads/Absolook-181b-boon-lay-meadow-5.jpg',
   'https://www.renonation.sg/wp-content/uploads/corazon-visioncrest-01.jpg'];
 
+  bool _isButtonClicked = false;
 
   Color mainColor = const Color(0xff3C3261);
 
@@ -156,7 +169,7 @@ class _HDBDetailState extends State<HDBDetail> {
                     children: <Widget>[
                       new Icon(Icons.home, color: Colors.white, size: 20),
                       new Text(
-                          '\n' + '   Neighbourhood: ' + widget.houses["town"] +
+                          '\n' + '   Neighbourhood: ' + widget.houses["town"] + mrt_name +
                               '\n',
                           style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
@@ -284,16 +297,19 @@ class _HDBDetailState extends State<HDBDetail> {
                             ]
                         )
                     )
-                )
-
-
+                ),
               ],
             ),
           ),
+
+
         )
       ]),
     );
   }
+
+
+
 
   Future<String> getUid() async {
     final FirebaseUser user = await FirebaseAuth.instance.currentUser();
@@ -315,6 +331,8 @@ class _HDBDetailState extends State<HDBDetail> {
     }
   }
 }
+
+
 
 
 
