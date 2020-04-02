@@ -10,6 +10,8 @@ import 'hdb_detail.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:math';
 import 'search_filters.dart';
+import 'package:hdbfinder/shared/loading.dart';
+import 'package:hdbfinder/services/prediction/recommendations.dart';
 
 
 
@@ -23,11 +25,18 @@ class _HomeState extends State<Home> {
 
   var houses;
   Color mainColor = const Color(0xff3a506b);
+  bool loading = false;
 
   void getData() async {
-    var data = await getJson('https://data.gov.sg/api/action/datastore_search?resource_id=42ff9cfe-abe5-4b54-beda-c88f9bb438ee');
+    setState(() {
+      loading = true;
+    });
+    Recommendations r=Recommendations();
+    await r.getRecommendations();
+    var data = r.jsonRecommendations;
 
     setState(() {
+      loading = false;
       houses = data['result']['records'];
     });
   }
@@ -39,7 +48,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     getData();
 
-    return new Scaffold(
+    return /*loading ? Loading() :*/ new Scaffold(
       drawer: MenuDrawer(),
       backgroundColor: Color(0xffe0e0e2),
       appBar: AppBar(
