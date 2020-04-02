@@ -2,17 +2,21 @@ import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hdbfinder/services/database.dart';
+import 'package:hdbfinder/services/search_request/data_request.dart';
 import 'dart:math';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:hdbfinder/services/prediction/price_predict.dart';
 import 'package:hdbfinder/services/prediction/process_predict.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hdbfinder/services/search_request/pollution_retrieve.dart';
+
 
 
 class HDBDetail extends StatefulWidget {
   final houses;
   final i;
-
+  final PollutionIndex p=PollutionIndex();
+  var region;
   final List <double> resales = new List(12);
 
   HDBDetail(this.houses, this.i){
@@ -31,7 +35,20 @@ class HDBDetail extends StatefulWidget {
       resales[count] = processOutput(predict, i);
       count++;
     }
+    p.fetch();
+    if(houses['town'] == 'BUKIT BATOK'|| houses['town']== 'CHOA CHU KANG'|| houses['town'] =='CLEMENTI'|| houses['town'] =='JURONG EAST'|| houses['town'] =='JURONG WEST'|| houses['town'] =='LIM CHU KANG'|| houses['town'] =='BUKIT PANJANG')
+      region=0;
+    else if(houses['town'] == 'BEDOK'|| houses['town']== 'HOUGANG'|| houses['town'] =='KALLANG/WHAMPOA'|| houses['town'] =='SERANGOON'|| houses['town'] =='MARINE PARADE'|| houses['town'] =='TAMPINES'|| houses['town'] =='GEYLANG'|| houses['town'] =='PASIR RIS'|| houses['town'] =='PUNGGOL')
+      region=2;
+    else if(houses['town'] == 'ANG MO KIO'|| houses['town']== 'BISHAN'|| houses['town'] =='CENTRAL AREA'|| houses['town'] =='TOA PAYOH')
+      region=3;
+    else if(houses['town'] == 'BUKIT MERAH'|| houses['town']== 'BUKIT TIMAH'|| houses['town'] =='QUEENSTOWN')
+      region=4;
+    else if(houses['town'] == 'SENGKANG'|| houses['town']== 'WOODLANDS'|| houses['town'] =='YISHUN'|| houses['town'] =='SEMBAWANG')
+      region=5;
+
   }
+
 
   @override
   _HDBDetailState createState() => _HDBDetailState();
@@ -154,9 +171,20 @@ class _HDBDetailState extends State<HDBDetail> {
                 ),
                 new Row(
                     children: <Widget>[
-                      new Icon(Icons.home, color: Colors.white, size: 20),
+                      new Icon(Icons.explore, color: Colors.white, size: 20),
                       new Text(
                           '\n' + '   Neighbourhood: ' + widget.houses["town"] +
+                              '\n',
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Colors.white, fontSize: 18))
+                      )
+                    ]),
+                new Row(
+                    children: <Widget>[
+                      new Icon(Icons.explore, color: Colors.white, size: 20),
+                      new Text(
+                          '\n' + '   Region: ' + widget.p.readings[widget.region].name.toUpperCase()+
                               '\n',
                           style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
@@ -239,6 +267,22 @@ class _HDBDetailState extends State<HDBDetail> {
                       new Text(
                           '\n' + '   Storey: ' + widget.houses["storey_range"] +
                               '\n',
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Colors.white, fontSize: 18))
+                      )
+                    ]),
+                new Row(
+                    children: <Widget>[
+                      new Icon(
+                          Icons.spa, color: Colors.white, size: 20),
+                      new Text(
+                          '\n' + '\n' + '   Pollution:   ' +
+                             'Status: ' + widget.p.status.toUpperCase() +
+                              '\n                      ' + '  PM10: ' + widget.p.readings[widget.region].pm10.toString() +
+                              '\n                      ' + '  SO2: '+ widget.p.readings[widget.region].so2.toString()
+
+                          ,
                           style: GoogleFonts.montserrat(
                               textStyle: TextStyle(
                                   color: Colors.white, fontSize: 18))
