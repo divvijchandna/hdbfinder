@@ -1,0 +1,16 @@
+import 'package:hdbfinder/services/search_request/pollution_retrieve.dart';
+
+
+void main() async {
+  //runApp(MyApp());
+
+  PollutionIndex p=PollutionIndex();
+  await p.fetch();
+  print(p.status);
+  print(p.timestamp);
+  print(p.readings[0].name);
+  print(p.readings[0].latitude);
+  print(p.readings[0].longitude);
+  print(p.readings[0].pm10);
+  print(p.readings[0].so2); //see pollution_index.dart for further class details
+}
