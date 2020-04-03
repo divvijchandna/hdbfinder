@@ -24,15 +24,15 @@ import 'package:google_fonts/google_fonts.dart';
   }
 }*/
 
-class LocationScreen extends StatefulWidget
+class LocationScreen1 extends StatefulWidget
 {
 
   final Key _mapKey = UniqueKey();
   @override
-  _LocationScreenState createState() => _LocationScreenState();
+  _LocationScreen1State createState() => _LocationScreen1State();
 }
 
-class _LocationScreenState extends State<LocationScreen>
+class _LocationScreen1State extends State<LocationScreen1>
 {
   @override
   Widget build(BuildContext context)
