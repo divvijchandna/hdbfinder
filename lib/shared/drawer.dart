@@ -39,7 +39,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
             onTap: () {
               Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MyMap())
+                  MaterialPageRoute(builder: (context) => Home())
               );
             },
           ),

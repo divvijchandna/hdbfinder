@@ -44,7 +44,7 @@ class _LocationScreenState extends State<LocationScreen>
                   color: Color(0xffffffff), fontSize: 22.0, fontWeight: FontWeight.bold)
           ),
         ),
-        backgroundColor: Color(0xff003f91),
+          backgroundColor: Color(0xff003f91),
           centerTitle: true,
         ),
         body: TheMap(key:widget._mapKey)
@@ -89,7 +89,7 @@ class _MyAppState extends State<TheMap>
   getData() async {
     try {
       final response =
-      await http.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+'1.340680, 103.687047' +'&radius=1500&type=school&key=AIzaSyBoTJ8MwgJlQ07zjEw3SSyUrPh0Tcveu6E');
+      await http.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+'1.340680, 103.687047' +'&radius=1500&type=hospital&key=AIzaSyBoTJ8MwgJlQ07zjEw3SSyUrPh0Tcveu6E');
 
       final int statusCode = response.statusCode;
 
@@ -101,12 +101,12 @@ class _MyAppState extends State<TheMap>
           Map result = results[index];
           Map location = result["geometry"]["location"];
           LatLng latLngMarker = LatLng(location["lat"], location["lng"]);
-          String school_name = result["name"];
-          String school_vicinity = result["vicinity"];
+          String hospital_name = result["name"];
+          String hospital_vicinity = result["vicinity"];
 
 
           return Marker(markerId: MarkerId("marker$index"),position: latLngMarker,
-              infoWindow: InfoWindow(title: school_name, snippet: school_vicinity),
+            infoWindow: InfoWindow(title: hospital_name, snippet: hospital_vicinity),
           );
         });
 
@@ -128,17 +128,17 @@ class _MyAppState extends State<TheMap>
   {
     return Scaffold(
       //also this avoids it crashing/breaking when the keyboard is up
-        resizeToAvoidBottomInset: false,
-        body: GoogleMap(
-          markers: Set.from(
-            markers,
-          ),
-          onMapCreated: _onMapCreated,
-          initialCameraPosition: CameraPosition(
-            target: const LatLng(1.354395, 103.831468),
-            zoom: 11.0,
-          ),
+      resizeToAvoidBottomInset: false,
+      body: GoogleMap(
+        markers: Set.from(
+          markers,
         ),
+        onMapCreated: _onMapCreated,
+        initialCameraPosition: CameraPosition(
+          target: const LatLng(1.354395, 103.831468),
+          zoom: 11.0,
+        ),
+      ),
 
     );
   }
