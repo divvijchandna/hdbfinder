@@ -97,7 +97,7 @@ class _MyAppState extends State<TheMap>
         Map responseBody = json.decode(response.body);
         List results = responseBody["results"];
 
-        Iterable _markers = Iterable.generate(10, (index) {
+        Iterable _markers = Iterable.generate(3, (index) {
           Map result = results[index];
           Map location = result["geometry"]["location"];
           LatLng latLngMarker = LatLng(location["lat"], location["lng"]);
