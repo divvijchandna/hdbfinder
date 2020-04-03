@@ -48,7 +48,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     getData();
 
-    return /*loading ? Loading() :*/ new Scaffold(
+    return new Scaffold(
       drawer: MenuDrawer(),
       backgroundColor: Color(0xffe0e0e2),
       appBar: AppBar(
@@ -212,7 +212,7 @@ class HDBTitle extends StatelessWidget {
     return new Padding(
       padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
       child: new Text(
-        'Featured',
+        'Recommended',
         style: GoogleFonts.montserrat(
             textStyle: TextStyle(
                 color: Color(0xff6d326d), fontSize: 32.0)
