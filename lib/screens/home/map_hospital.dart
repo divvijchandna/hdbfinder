@@ -38,7 +38,7 @@ class _LocationScreenState extends State<LocationScreen>
   Widget build(BuildContext context)
   {
     return Scaffold(
-        appBar: AppBar(title: Text('HDBFinder: Nearby Schools',
+        appBar: AppBar(title: Text('HDBFinder: Nearby Healthcare',
           style: GoogleFonts.montserrat(
               textStyle: TextStyle(
                   color: Color(0xffffffff), fontSize: 22.0, fontWeight: FontWeight.bold)
