@@ -89,7 +89,7 @@ class _MyAppState extends State<TheMap>
   getData() async {
     try {
       final response =
-      await http.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+'1.340680, 103.687047' +'&radius=1500&type=school&key=AIzaSyBoTJ8MwgJlQ07zjEw3SSyUrPh0Tcveu6E');
+      await http.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+'1.348176, 103.855548' +'&radius=1500&type=school&key=AIzaSyBoTJ8MwgJlQ07zjEw3SSyUrPh0Tcveu6E');
 
       final int statusCode = response.statusCode;
 
